@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Mi Aplicación</string>
+
+    <string name="navigation_drawer_open">Abrir menu em espanhol</string>
+    <string name="navigation_drawer_close">Fechar menu em espanhol</string>
+
+    <string name="action_settings">Configuraciones</string>
+</resources>
