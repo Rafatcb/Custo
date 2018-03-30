@@ -3,6 +3,12 @@
 
     <string name="navigation_drawer_open">Abrir menu</string>
     <string name="navigation_drawer_close">Fechar menu</string>
+    <string name="categoria">Categoria</string>
+    <string name="menu_categoria">Categorias</string>
+    <string name="menu_despesa">Despesas</string>
+    <string name="menu_grafico_donut">Por Categoria</string>
+    <string name="menu_grafico_linha">Por Tempo</string>
+    <string name="titulo_tela_categorias">Gerenciar Categorias</string>
 
     <string name="action_settings">Configurações</string>
 </resources>
