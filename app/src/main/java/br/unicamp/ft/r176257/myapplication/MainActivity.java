@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.menu_despesa) {
+            Intent intent = new Intent(this, GerenciarDespesas.class);
+            startActivity(intent);
 
         } else if (id == R.id.menu_grafico_donut) {
 

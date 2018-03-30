@@ -9,6 +9,14 @@
     <string name="menu_grafico_donut">Por Categoria</string>
     <string name="menu_grafico_linha">Por Tempo</string>
     <string name="titulo_tela_categorias">Gerenciar Categorias</string>
+    <string name="titulo_tela_despesas">Gerenciar Despesas</string>
+    <string name="add_despesa">R$</string>
 
     <string name="action_settings">Configurações</string>
+
+    <string-array name="spinner_despesas">
+        <item>Categoria 1</item>
+        <item>Categoria 2</item>
+        <item>Categoria 3</item>
+    </string-array>
 </resources>
