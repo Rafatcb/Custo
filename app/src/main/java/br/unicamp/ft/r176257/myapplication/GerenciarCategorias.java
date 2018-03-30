@@ -116,18 +116,18 @@ public class GerenciarCategorias extends AppCompatActivity {
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
                 tamView,
                 tamView);
+        fpixels = metrics.density * 5f; // 5f = tamanho em dp
+        int tamDp = (int) (fpixels + 0.5f);
+        viewParams.setMargins(tamDp, tamDp, tamDp, tamDp);
         colorView.setLayoutParams(viewParams);
         colorView.setTag("color" + categoriasLivres.peek());
         colorView.setBackgroundColor(cores.get(categoriasLivres.peek()));
-        fpixels = metrics.density * 5f; // 5f = tamanho em dp
-        int padding = (int) (fpixels + 0.5f);
-        colorView.setPadding(padding, 0, padding, 0);
 
         LinearLayout.LayoutParams edtParams = new LinearLayout.LayoutParams (
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 1.0f);
-        edtParams.setMargins(0,padding,0,padding);
+        edtParams.setMargins(0,tamDp,0,tamDp);
         EditText edtTxt = new EditText(this);
         edtTxt.setHint(R.string.categoria);
         edtTxt.setLayoutParams(edtParams);

@@ -20,11 +20,11 @@
         <menu>
             <item
                 android:id="@+id/menu_grafico_donut"
-                android:icon="@drawable/ic_timeline_black_24dp"
+                android:icon="@drawable/ic_donut_large_black_24dp"
                 android:title="@string/menu_grafico_donut" />
             <item
                 android:id="@+id/menu_grafico_linha"
-                android:icon="@drawable/ic_donut_large_black_24dp"
+                android:icon="@drawable/ic_timeline_black_24dp"
                 android:title="@string/menu_grafico_linha" />
         </menu>
     </item>

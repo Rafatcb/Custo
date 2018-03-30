@@ -85,7 +85,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.menu_grafico_donut) {
-
+            Intent intent = new Intent(this, GraficoDonut.class);
+            startActivity(intent);
         } else if (id == R.id.menu_grafico_linha) {
 
         }

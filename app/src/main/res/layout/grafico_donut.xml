@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7 Dias"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30 Dias"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mês"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ano"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+        <EditText
+            android:id="@+id/edttxt_data_inicio"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:inputType="none"
+            android:hint="Data início"
+            android:layout_marginRight="15dp"
+            android:focusable="false"
+            android:gravity="center_horizontal"/>
+        <EditText
+            android:id="@+id/edttxt_data_fim"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:inputType="none"
+            android:hint="Data fim"
+            android:focusable="false"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="lecho.lib.hellocharts.samples.PieChartActivity"
+        tools:ignore="MergeRootFrame" />
+</LinearLayout>

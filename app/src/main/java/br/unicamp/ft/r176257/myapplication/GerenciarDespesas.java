@@ -49,8 +49,12 @@ public class GerenciarDespesas extends AppCompatActivity {
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
                 tamDp,
                 ViewGroup.LayoutParams.MATCH_PARENT);
+        fpixels = metrics.density * 5f; // 5f = tamanho em dp
+        tamDp = (int) (fpixels + 0.5f);
+        viewParams.setMargins(tamDp, tamDp, tamDp, tamDp);
         colorView.setLayoutParams(viewParams);
         colorView.setBackgroundColor(cores.get(1));
+
 
         fpixels = metrics.density * 15f; // 5f = tamanho em dp
         tamDp = (int) (fpixels + 0.5f);
