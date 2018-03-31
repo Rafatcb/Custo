@@ -5,6 +5,16 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
     <dimen name="pie_chart_text1_size">42sp</dimen>
     <dimen name="pie_chart_text2_size">16dp</dimen>
+
+    <dimen name="altura_graficos">300dp</dimen>
+    <dimen name="margin_bottom_principal">20dp</dimen>
+    <dimen name="margin_pequena_grude">5dp</dimen>
+    <dimen name="margin_media_grude">10dp</dimen>
+    <dimen name="tamanho_view_cor">40dp</dimen>
+    <dimen name="filtros_datepicker_width">140dp</dimen>
+    <dimen name="filtros_margin_entre_datepickers">15dp</dimen>
+    <dimen name="btn_add_width">55dp</dimen>
 </resources>

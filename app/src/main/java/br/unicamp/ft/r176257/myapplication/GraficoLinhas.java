@@ -78,7 +78,8 @@ public class GraficoLinhas extends AppCompatActivity {
             chart.setViewportCalculationEnabled(false);
 
             resetViewport();
-
+            toggleLabelForSelected();
+            
             return rootView;
         }
 
@@ -327,7 +328,7 @@ public class GraficoLinhas extends AppCompatActivity {
 
             @Override
             public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
-                Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -2,15 +2,11 @@ package br.unicamp.ft.r176257.myapplication;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -31,7 +27,7 @@ public class GerenciarCategorias extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gerenciar_categorias);
 
-        parentLayout = (LinearLayout)findViewById(R.id.parentLayout);
+        parentLayout = (LinearLayout)findViewById(R.id.scroll_container);
         cores.add(Color.BLUE);
         cores.add(Color.GREEN);
         cores.add(Color.RED);
@@ -52,14 +48,11 @@ public class GerenciarCategorias extends AppCompatActivity {
         LinearLayout layoutCatAdicionada = (LinearLayout)parentLayout.findViewWithTag("layout" + categoriasOcupadas.get(categoriasOcupadas.size()-1));
 
 
-        DisplayMetrics metrics = getApplicationContext().getResources().getDisplayMetrics();
-        float fpixels = metrics.density * 55f; // 55f = tamanho em dp
-        int tamBtn = (int) (fpixels + 0.5f);
+        int tamBtn = (int) getResources().getDimension(R.dimen.btn_add_width);
         LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(
                 tamBtn,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
 
-        System.out.println("find: btn_add_categoria" + categoriasOcupadas.get(categoriasOcupadas.size()-1));
         Button btnEdit = (Button) layoutCatAdicionada.findViewWithTag("btn_add_categoria" + categoriasOcupadas.get(categoriasOcupadas.size()-1));
         btnEdit.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_menu_edit, 0, 0, 0);
         btnEdit.setTag("btn_edit_categoria" + categoriasOcupadas.get(categoriasOcupadas.size()-1));
@@ -92,7 +85,6 @@ public class GerenciarCategorias extends AppCompatActivity {
 
         int numCategoriaExcluida = Integer.parseInt(tag.substring(tag.length() - 1));
         LinearLayout layoutCatExcluida = (LinearLayout) parentLayout.findViewWithTag("layout" + numCategoriaExcluida);
-        System.out.println("excluido: " + numCategoriaExcluida);
         parentLayout.removeView(layoutCatExcluida);
         categoriasLivres.push(numCategoriaExcluida);
         categoriasOcupadas.remove(new Integer(numCategoriaExcluida));
@@ -112,15 +104,13 @@ public class GerenciarCategorias extends AppCompatActivity {
         subLayout.setOrientation(LinearLayout.HORIZONTAL);
 
         DisplayMetrics metrics = getApplicationContext().getResources().getDisplayMetrics();
-        float fpixels = metrics.density * 40f; // 40f = tamanho em dp
-        int tamView = (int) (fpixels + 0.5f);
+        int tamView =  (int) getResources().getDimension(R.dimen.tamanho_view_cor);
 
         View colorView = new View(this);
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
                 tamView,
                 tamView);
-        fpixels = metrics.density * 5f; // 5f = tamanho em dp
-        int tamDp = (int) (fpixels + 0.5f);
+        int tamDp = (int) getResources().getDimension(R.dimen.margin_pequena_grude);
         viewParams.setMargins(tamDp, tamDp, tamDp, tamDp);
         colorView.setLayoutParams(viewParams);
         colorView.setTag("color" + categoriasLivres.peek());
@@ -146,8 +136,7 @@ public class GerenciarCategorias extends AppCompatActivity {
             }
         });
 
-        fpixels = metrics.density * 55f; // 55f = tamanho em dp
-        int tamBtn = (int) (fpixels + 0.5f);
+        int tamBtn = (int) getResources().getDimension(R.dimen.btn_add_width);
         LinearLayout.LayoutParams btnParams = new LinearLayout.LayoutParams(
                 tamBtn,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);

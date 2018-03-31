@@ -4,5 +4,34 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="menu_categoria">Categories</string>
+    <string name="menu_despesa">Expenses</string>
+    <string name="menu_grafico_donut">By Category</string>
+    <string name="menu_grafico_linha">By Time</string>
+    <string name="menu_cabecalho_nome">Name</string>
+    <string name="menu_cabecalho_descricao">Description</string>
+
+    <string name="titulo_tela_categorias">Manage Categories</string>
+    <string name="titulo_tela_despesas">Manage Expenses</string>
+    <string name="titulo_tela_donut">Chart by Category</string>
+    <string name="titulo_tela_linhas">Chart by Time</string>
+
+    <string name="categoria">Category</string>
+
+    <string name="btn_filtro_30dias">30 Days</string>
+    <string name="btn_filtro_mes">Month</string>
+    <string name="btn_filtro_ano">Year</string>
+    <string name="btn_filtro_sempre">Ever</string>
+    <string name="data_inicio">Start Date</string>
+    <string name="data_fim">Final Date</string>
+
+    <string name="grafico_linhas_geral">General</string>
+
+    <string name="opcao_idioma">Language</string>
+
+    <string-array name="spinner_despesas">
+        <item>Category 1</item>
+        <item>Category 2</item>
+        <item>Category 3</item>
+    </string-array>
 </resources>

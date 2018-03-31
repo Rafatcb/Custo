@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -186,7 +185,12 @@ public class GraficoDonut extends AppCompatActivity {
 
             @Override
             public void onValueSelected(int arcIndex, SliceValue value) {
-                Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
+                data.setCenterText1(String.format("%.0f", value.getValue()) + "%");
+                /*switch (value.getColor()) {   // Para mudar a categoria
+                    case :
+                        data.setCenterText2("Categoria W");
+                }*/
             }
 
             @Override

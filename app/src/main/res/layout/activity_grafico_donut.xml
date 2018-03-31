@@ -7,34 +7,33 @@
     <lecho.lib.hellocharts.view.PieChartView
         android:id="@+id/grafico_donut"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="@dimen/altura_graficos"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="@dimen/margin_bottom_principal"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:tag="layout0">
         <View
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/margin_pequena_grude"
+            android:layout_marginRight="@dimen/margin_pequena_grude"
+            android:layout_marginBottom="@dimen/margin_pequena_grude"
+            android:layout_marginTop="@dimen/margin_pequena_grude"
+            android:layout_width="@dimen/tamanho_view_cor"
+            android:layout_height="@dimen/tamanho_view_cor"
             android:background="#320a1a" />
         <TextView
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="2.7"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="@dimen/margin_pequena_grude"
             android:text="Categoria 1"
             android:gravity="center_vertical"/>
         <TextView
             android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="@dimen/margin_media_grude"
             android:text="R$ 30,00"
             android:gravity="center_vertical"/>
     </LinearLayout>
@@ -44,25 +43,24 @@
         android:orientation="horizontal"
         android:tag="layout0">
         <View
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/margin_pequena_grude"
+            android:layout_marginRight="@dimen/margin_pequena_grude"
+            android:layout_marginBottom="@dimen/margin_pequena_grude"
+            android:layout_marginTop="@dimen/margin_pequena_grude"
+            android:layout_width="@dimen/tamanho_view_cor"
+            android:layout_height="@dimen/tamanho_view_cor"
             android:background="#660066" />
         <TextView
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="2.7"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="@dimen/margin_pequena_grude"
             android:text="Categoria 2"
             android:gravity="center_vertical"/>
         <TextView
             android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="@dimen/margin_media_grude"
             android:text="R$ 30,00"
             android:gravity="center_vertical"/>
     </LinearLayout>
@@ -72,25 +70,24 @@
         android:orientation="horizontal"
         android:tag="layout0">
         <View
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/margin_pequena_grude"
+            android:layout_marginRight="@dimen/margin_pequena_grude"
+            android:layout_marginBottom="@dimen/margin_pequena_grude"
+            android:layout_marginTop="@dimen/margin_pequena_grude"
+            android:layout_width="@dimen/tamanho_view_cor"
+            android:layout_height="@dimen/tamanho_view_cor"
             android:background="#411bb9" />
         <TextView
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="2.7"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="@dimen/margin_pequena_grude"
             android:text="Categoria 3"
             android:gravity="center_vertical"/>
         <TextView
             android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="@dimen/margin_media_grude"
             android:text="R$ 30,00"
             android:gravity="center_vertical"/>
     </LinearLayout>

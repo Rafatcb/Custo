@@ -28,36 +28,28 @@ public class GerenciarDespesas extends AppCompatActivity {
         cores.add(Color.RED);
         cores.add(Color.CYAN);
         cores.add(Color.MAGENTA);
-        parentLayout = (LinearLayout)findViewById(R.id.parentLayout);
+        parentLayout = (LinearLayout)findViewById(R.id.scroll_container);
     }
 
     public void addClick(View view) {
         EditText edtTxt = (EditText) findViewById(R.id.edttxt_despesa);
 
-        DisplayMetrics metrics = getApplicationContext().getResources().getDisplayMetrics();
-        float fpixels = metrics.density * 45f; // 45f = tamanho em dp
-        int tamDp = (int) (fpixels + 0.5f);
-
         LinearLayout linhaNova = new LinearLayout(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                tamDp);
+                ViewGroup.LayoutParams.WRAP_CONTENT);
         linhaNova.setLayoutParams(layoutParams);
         linhaNova.setOrientation(LinearLayout.HORIZONTAL);
 
+        int tamDp = (int) getResources().getDimension(R.dimen.tamanho_view_cor);
         View colorView = new View(this);
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
                 tamDp,
-                ViewGroup.LayoutParams.MATCH_PARENT);
-        fpixels = metrics.density * 5f; // 5f = tamanho em dp
-        tamDp = (int) (fpixels + 0.5f);
+                tamDp);
+        tamDp = (int) getResources().getDimension(R.dimen.margin_pequena_grude);
         viewParams.setMargins(tamDp, tamDp, tamDp, tamDp);
         colorView.setLayoutParams(viewParams);
         colorView.setBackgroundColor(cores.get(1));
-
-
-        fpixels = metrics.density * 15f; // 5f = tamanho em dp
-        tamDp = (int) (fpixels + 0.5f);
 
         TextView textNome = new TextView(this);
         LinearLayout.LayoutParams txtNomeParams = new LinearLayout.LayoutParams(
@@ -65,7 +57,6 @@ public class GerenciarDespesas extends AppCompatActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 2f);
         textNome.setLayoutParams(txtNomeParams);
-        textNome.setPadding(tamDp, 0, tamDp, 0);
         textNome.setGravity(Gravity.CENTER_VERTICAL);
         textNome.setText("Texto");
 
@@ -73,16 +64,16 @@ public class GerenciarDespesas extends AppCompatActivity {
         LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
+        tamDp = (int) getResources().getDimension(R.dimen.margin_media_grude);
+        txtParams.setMargins(tamDp, tamDp, tamDp, tamDp);;
         textData.setLayoutParams(txtParams);
         textData.setGravity(Gravity.CENTER_VERTICAL);
         textData.setText("20/03/2018");
 
         TextView textDespesa = new TextView(this);
         textDespesa.setLayoutParams(txtParams);
-        textDespesa.setPadding(tamDp, 0, tamDp, 0);
         textDespesa.setGravity(Gravity.CENTER_VERTICAL);
         textDespesa.setText("R$ 321,20");
-
 
         edtTxt.setText("");
         linhaNova.addView(colorView);

@@ -1,8 +1,37 @@
 <resources>
     <string name="app_name">Mi Aplicación</string>
 
-    <string name="navigation_drawer_open">Abrir menu em espanhol</string>
-    <string name="navigation_drawer_close">Fechar menu em espanhol</string>
+    <string name="navigation_drawer_open">Abrir menú</string>
+    <string name="navigation_drawer_close">Cerrar menú</string>
 
-    <string name="action_settings">Configuraciones</string>
+    <string name="menu_categoria">Categorías</string>
+    <string name="menu_despesa">Gastos</string>
+    <string name="menu_grafico_donut">Por Categoría</string>
+    <string name="menu_grafico_linha">Por Tiempo</string>
+    <string name="menu_cabecalho_nome">Nombre</string>
+    <string name="menu_cabecalho_descricao">Descripción</string>
+
+    <string name="titulo_tela_categorias">Gestionar Categorías</string>
+    <string name="titulo_tela_despesas">Gestionar Gastos</string>
+    <string name="titulo_tela_donut">Gráfico por Categoría</string>
+    <string name="titulo_tela_linhas">Gráfico por Tiempo</string>
+
+    <string name="categoria">Categoría</string>
+
+    <string name="btn_filtro_30dias">30 Días</string>
+    <string name="btn_filtro_mes">Mes</string>
+    <string name="btn_filtro_ano">Año</string>
+    <string name="btn_filtro_sempre">Siempre</string>
+    <string name="data_inicio">Fecha de Inicio</string>
+    <string name="data_fim">Fecha Final</string>
+
+    <string name="grafico_linhas_geral">General</string>
+
+    <string name="opcao_idioma">Idioma</string>
+
+    <string-array name="spinner_despesas">
+        <item>Categoría 1</item>
+        <item>Categoría 2</item>
+        <item>Categoría 3</item>
+    </string-array>
 </resources>

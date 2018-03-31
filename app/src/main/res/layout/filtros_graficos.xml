@@ -35,17 +35,17 @@
         android:gravity="center_horizontal">
         <EditText
             android:id="@+id/edttxt_data_inicio"
-            android:layout_width="120dp"
+            android:layout_width="@dimen/filtros_datepicker_width"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:inputType="none"
             android:hint="@string/data_inicio"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="@dimen/filtros_margin_entre_datepickers"
             android:focusable="false"
             android:gravity="center_horizontal"/>
         <EditText
             android:id="@+id/edttxt_data_fim"
-            android:layout_width="120dp"
+            android:layout_width="@dimen/filtros_datepicker_width"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:inputType="none"
