@@ -2,6 +2,7 @@ package br.unicamp.ft.r176257.myapplication;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.DisplayMetrics;
@@ -9,6 +10,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -28,6 +30,7 @@ public class GerenciarCategorias extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gerenciar_categorias);
+
         parentLayout = (LinearLayout)findViewById(R.id.parentLayout);
         cores.add(Color.BLUE);
         cores.add(Color.GREEN);

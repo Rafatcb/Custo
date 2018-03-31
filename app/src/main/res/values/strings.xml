@@ -11,8 +11,14 @@
     <string name="titulo_tela_categorias">Gerenciar Categorias</string>
     <string name="titulo_tela_despesas">Gerenciar Despesas</string>
     <string name="titulo_tela_donut">Gráfico por Categoria</string>
-    <string name="titulo_tela_linha">Gráfico por Tempo</string>
+    <string name="titulo_tela_linhas">Gráfico por Tempo</string>
     <string name="add_despesa">R$</string>
+    <string name="btn_filtro_30dias">30 Dias</string>
+    <string name="btn_filtro_mes">Mês</string>
+    <string name="btn_filtro_ano">Ano</string>
+    <string name="btn_filtro_sempre">Sempre</string>
+    <string name="data_inicio">Data Início</string>
+    <string name="data_fim">Data Fim</string>
 
     <string name="action_settings">Configurações</string>
 

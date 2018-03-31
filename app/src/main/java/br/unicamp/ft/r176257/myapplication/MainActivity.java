@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -79,7 +80,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.menu_categoria) {
             Intent intent = new Intent(this, GerenciarCategorias.class);
             startActivity(intent);
-
         } else if (id == R.id.menu_despesa) {
             Intent intent = new Intent(this, GerenciarDespesas.class);
             startActivity(intent);
@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, GraficoDonut.class);
             startActivity(intent);
         } else if (id == R.id.menu_grafico_linha) {
+            Intent intent = new Intent(this, GraficoLinhas.class);
+            startActivity(intent);
 
         }
 

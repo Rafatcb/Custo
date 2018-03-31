@@ -34,6 +34,11 @@
             android:label="@string/titulo_tela_donut"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".GraficoLinhas"
+            android:label="@string/titulo_tela_linhas"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

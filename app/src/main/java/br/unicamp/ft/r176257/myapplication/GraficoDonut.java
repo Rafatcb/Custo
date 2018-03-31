@@ -1,28 +1,17 @@
 package br.unicamp.ft.r176257.myapplication;
 
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import lecho.lib.hellocharts.listener.PieChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.PieChartData;
@@ -32,84 +21,18 @@ import lecho.lib.hellocharts.view.PieChartView;
 
 public class GraficoDonut extends AppCompatActivity {
 
-    private Calendar calendarInicio = Calendar.getInstance();
-    private Calendar calendarFim = Calendar.getInstance();
-    private EditText edttxtDataInicio;
-    private EditText edttxtDataFim;
+    private FiltrosGraficos filtros = new FiltrosGraficos();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grafico_donut);
-        edttxtDataInicio = (EditText) findViewById(R.id.edttxt_data_inicio);
-        edttxtDataFim = (EditText) findViewById(R.id.edttxt_data_fim);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
-        }
-
-
-        final DatePickerDialog.OnDateSetListener dateInicio = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                calendarInicio.set(Calendar.YEAR, year);
-                calendarInicio.set(Calendar.MONTH, monthOfYear);
-                calendarInicio.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateDataInicio();
-            }
-
-        };
-
-        final DatePickerDialog.OnDateSetListener dateFim = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                calendarFim.set(Calendar.YEAR, year);
-                calendarFim.set(Calendar.MONTH, monthOfYear);
-                calendarFim.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateDataFim();
-            }
-
-        };
-
-        edttxtDataInicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(GraficoDonut.this, dateInicio, calendarInicio
-                        .get(Calendar.YEAR), calendarInicio.get(Calendar.MONTH),
-                        calendarInicio.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-        edttxtDataFim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(GraficoDonut.this, dateFim, calendarFim
-                        .get(Calendar.YEAR), calendarFim.get(Calendar.MONTH),
-                        calendarFim.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-        updateDataFim();
-        calendarInicio.set(Calendar.DAY_OF_MONTH, 1);
-        updateDataInicio();
+        LinearLayout item = (LinearLayout) findViewById(R.id.layoutInflater);
+        View child = getLayoutInflater().inflate(R.layout.filtros_graficos, null);
+        item.addView(child);
+        filtros.instanciar(savedInstanceState, GraficoDonut.this, 0);
 
     }
-
-    private void updateDataInicio() {
-        String myFormat = "dd/MM/yyyy";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-        edttxtDataInicio.setText(sdf.format(calendarInicio.getTime()));
-    }
-
-    private void updateDataFim() {
-        String myFormat = "dd/MM/yyyy";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-        edttxtDataFim.setText(sdf.format(calendarFim.getTime()));
-    }
-
 
     public static class PlaceholderFragment extends Fragment {
 
@@ -130,7 +53,7 @@ public class GraficoDonut extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             setHasOptionsMenu(true);
-            View rootView = inflater.inflate(R.layout.activity_grafico, container, false);
+            View rootView = inflater.inflate(R.layout.activity_grafico_donut, container, false);
 
             chart = (PieChartView) rootView.findViewById(R.id.grafico_donut);
             chart.setOnValueTouchListener(new ValueTouchListener());
