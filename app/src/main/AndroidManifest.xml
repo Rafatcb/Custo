@@ -39,6 +39,11 @@
             android:label="@string/titulo_tela_linhas"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".IdiomaActivity"
+            android:label="@string/titulo_tela_idioma"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

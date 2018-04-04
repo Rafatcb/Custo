@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.opcao_idioma) {
-            //Intent intent = new Intent(this, MudarIdioma.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, IdiomaActivity.class);
+            startActivity(intent);
             return true;
         }
 

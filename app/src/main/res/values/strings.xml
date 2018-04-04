@@ -15,6 +15,7 @@
     <string name="titulo_tela_despesas">Gerenciar Despesas</string>
     <string name="titulo_tela_donut">Gráfico por Categoria</string>
     <string name="titulo_tela_linhas">Gráfico por Tempo</string>
+    <string name="titulo_tela_idioma">Idioma</string>
 
     <string name="categoria">Categoria</string>
 
