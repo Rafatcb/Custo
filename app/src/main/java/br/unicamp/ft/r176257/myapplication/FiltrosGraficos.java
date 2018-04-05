@@ -102,7 +102,7 @@ public class FiltrosGraficos {
             @Override
             public void onClick(View v) {
                 calendarInicio = Calendar.getInstance();
-                calendarInicio.add(Calendar.MONTH, -1);
+                calendarInicio.add(Calendar.DATE, -30);
                 calendarFim = Calendar.getInstance();
                 updateDataInicio();
                 updateDataFim();
