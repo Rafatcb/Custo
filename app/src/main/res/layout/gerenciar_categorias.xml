@@ -2,11 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
     <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:paddingTop="@dimen/fragment_padding_top">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,7 +22,7 @@
                 android:tag="layout0">
                 <View
                     android:tag="color0"
-                    android:layout_marginLeft="@dimen/margin_media_grude"
+                    android:layout_marginLeft="@dimen/margin_pequena_grude"
                     android:layout_marginRight="@dimen/margin_pequena_grude"
                     android:layout_marginBottom="@dimen/margin_pequena_grude"
                     android:layout_marginTop="@dimen/margin_pequena_grude"
@@ -37,8 +40,7 @@
                     android:tag="btn_add_categoria0"
                     android:layout_width="@dimen/btn_add_width"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@android:drawable/ic_input_add"
-                    android:onClick="addClick"/>
+                    android:drawableLeft="@android:drawable/ic_input_add"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

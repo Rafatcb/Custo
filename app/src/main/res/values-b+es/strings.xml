@@ -3,6 +3,8 @@
     <string name="navigation_drawer_open">Abrir menú</string>
     <string name="navigation_drawer_close">Cerrar menú</string>
 
+    <string name="menu_grupo_gerenciar">Gestionar</string>
+    <string name="menu_grupo_graficos">Gráficos</string>
     <string name="menu_categoria">Categorías</string>
     <string name="menu_despesa">Gastos</string>
     <string name="menu_grafico_donut">Por Categoría</string>

@@ -4,6 +4,8 @@
     <string name="navigation_drawer_open">Abrir menu</string>
     <string name="navigation_drawer_close">Fechar menu</string>
 
+    <string name="menu_grupo_gerenciar">Gerenciar</string>
+    <string name="menu_grupo_graficos">Gráficos</string>
     <string name="menu_categoria">Categorias</string>
     <string name="menu_despesa">Despesas</string>
     <string name="menu_grafico_donut">Por Categoria</string>

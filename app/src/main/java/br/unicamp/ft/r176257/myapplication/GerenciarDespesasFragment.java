@@ -2,9 +2,9 @@ package br.unicamp.ft.r176257.myapplication;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
+import android.support.v4.app.Fragment;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,27 +14,46 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GerenciarDespesas extends AppCompatActivity {
+public class GerenciarDespesasFragment extends Fragment {
 
     private LinearLayout parentLayout;
     private List<Integer> cores = new ArrayList<>();
 
+    public GerenciarDespesasFragment() {
+
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.gerenciar_despesas);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View lview = inflater.inflate(R.layout.gerenciar_despesas, container, false);
+
         cores.add(Color.BLUE);
         cores.add(Color.GREEN);
         cores.add(Color.RED);
         cores.add(Color.CYAN);
         cores.add(Color.MAGENTA);
-        parentLayout = (LinearLayout)findViewById(R.id.scroll_container);
+        parentLayout = (LinearLayout) lview.findViewById(R.id.scroll_container);
+
+
+
+        lview.findViewWithTag("btn_add").setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        addClick(view);
+                    }
+                }
+        );
+
+        // Inflate the layout for this fragment
+        return lview;
     }
 
     public void addClick(View view) {
-        EditText edtTxt = (EditText) findViewById(R.id.edttxt_despesa);
+        EditText edtTxt = (EditText) this.getActivity().findViewById(R.id.edttxt_despesa);
 
-        LinearLayout linhaNova = new LinearLayout(this);
+        LinearLayout linhaNova = new LinearLayout(this.getActivity());
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -42,7 +61,7 @@ public class GerenciarDespesas extends AppCompatActivity {
         linhaNova.setOrientation(LinearLayout.HORIZONTAL);
 
         int tamDp = (int) getResources().getDimension(R.dimen.tamanho_view_cor);
-        View colorView = new View(this);
+        View colorView = new View(this.getActivity());
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
                 tamDp,
                 tamDp);
@@ -51,7 +70,7 @@ public class GerenciarDespesas extends AppCompatActivity {
         colorView.setLayoutParams(viewParams);
         colorView.setBackgroundColor(cores.get(1));
 
-        TextView textNome = new TextView(this);
+        TextView textNome = new TextView(this.getActivity());
         LinearLayout.LayoutParams txtNomeParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -60,7 +79,7 @@ public class GerenciarDespesas extends AppCompatActivity {
         textNome.setGravity(Gravity.CENTER_VERTICAL);
         textNome.setText("Texto");
 
-        TextView textData = new TextView(this);
+        TextView textData = new TextView(this.getActivity());
         LinearLayout.LayoutParams txtParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
@@ -70,7 +89,7 @@ public class GerenciarDespesas extends AppCompatActivity {
         textData.setGravity(Gravity.CENTER_VERTICAL);
         textData.setText("20/03/2018");
 
-        TextView textDespesa = new TextView(this);
+        TextView textDespesa = new TextView(this.getActivity());
         textDespesa.setLayoutParams(txtParams);
         textDespesa.setGravity(Gravity.CENTER_VERTICAL);
         textDespesa.setText("R$ 321,20");

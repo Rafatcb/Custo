@@ -34,7 +34,7 @@ public class GraficoLinhas extends AppCompatActivity {
         LinearLayout item = (LinearLayout) findViewById(R.id.layoutInflater);
         View child = getLayoutInflater().inflate(R.layout.filtros_graficos, null);
         item.addView(child);
-        filtros.instanciar(savedInstanceState, GraficoLinhas.this, 1);
+        //filtros.instanciar(savedInstanceState, GraficoLinhas.this, 1, this);
     }
 
     public static class PlaceholderFragment extends Fragment {

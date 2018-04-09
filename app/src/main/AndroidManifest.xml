@@ -20,28 +20,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GerenciarCategorias"
-            android:label="@string/titulo_tela_categorias"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".GerenciarDespesas"
-            android:label="@string/titulo_tela_despesas"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".GraficoDonut"
-            android:label="@string/titulo_tela_donut"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
             android:name=".GraficoLinhas"
             android:label="@string/titulo_tela_linhas"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".IdiomaActivity"
-            android:label="@string/titulo_tela_idioma"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

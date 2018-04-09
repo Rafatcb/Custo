@@ -1,9 +1,10 @@
-package br.unicamp.ft.r176257.myapplication;
+    package br.unicamp.ft.r176257.myapplication;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ public class FiltrosGraficos {
     private Calendar calendarFim = Calendar.getInstance();
     private EditText edttxtDataInicio;
     private EditText edttxtDataFim;
+    private View filtro;
     private Activity activity;
     private Button btn30Dias;
     private Button btnMes;
@@ -25,19 +27,20 @@ public class FiltrosGraficos {
     private Button btnSempre;
 
 
-    public void instanciar(Bundle savedInstanceState, Activity act, int tipo) {
+    public void instanciar(Bundle savedInstanceState, View cont, int tipo, Activity act) {
+        filtro = cont;
         activity = act;
-        edttxtDataInicio = (EditText) activity.findViewById(R.id.edttxt_data_inicio);
-        edttxtDataFim = (EditText) activity.findViewById(R.id.edttxt_data_fim);
-        btn30Dias = (Button) activity.findViewById(R.id.btnFiltro30Dias);
-        btnMes = (Button) activity.findViewById(R.id.btnFiltroMes);
-        btnAno = (Button) activity.findViewById(R.id.btnFiltroAno);
-        btnSempre = (Button) activity.findViewById(R.id.btnFiltroSempre);
+        edttxtDataInicio = (EditText) filtro.findViewById(R.id.edttxt_data_inicio);
+        edttxtDataFim = (EditText) filtro.findViewById(R.id.edttxt_data_fim);
+        btn30Dias = (Button) filtro.findViewById(R.id.btnFiltro30Dias);
+        btnMes = (Button) filtro.findViewById(R.id.btnFiltroMes);
+        btnAno = (Button) filtro.findViewById(R.id.btnFiltroAno);
+        btnSempre = (Button) filtro.findViewById(R.id.btnFiltroSempre);
         addOnClickBtnFiltros();
         if (savedInstanceState == null) {
             switch (tipo) {
                 case 0: // Donut
-                    activity.getFragmentManager().beginTransaction().add(R.id.container, new GraficoDonut.PlaceholderFragment()).commit();
+                    activity.getFragmentManager().beginTransaction().add(R.id.container, new GraficoLinhas.PlaceholderFragment()).commit();
                     break;
                 case 1: // Linhas
                     activity.getFragmentManager().beginTransaction().add(R.id.container, new GraficoLinhas.PlaceholderFragment()).commit();

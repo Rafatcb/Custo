@@ -10,6 +10,8 @@
     <string name="menu_cabecalho_nome">Name</string>
     <string name="menu_cabecalho_descricao">Description</string>
 
+    <string name="menu_grupo_gerenciar">Manage</string>
+    <string name="menu_grupo_graficos">Charts</string>
     <string name="titulo_tela_categorias">Manage Categories</string>
     <string name="titulo_tela_despesas">Manage Expenses</string>
     <string name="titulo_tela_donut">Chart by Category</string>
