@@ -1,5 +1,8 @@
 <resources>
+
     <string name="app_name" translatable="false">MyExpenses</string>
+    <string name="dev_1" translatable="false">Rafael Tavares Carvalho Barros</string>
+    <string name="dev_2" translatable="false">Ricardo Hideki Adati Tomomitsu</string>
 
     <string name="navigation_drawer_open">Abrir menu</string>
     <string name="navigation_drawer_close">Fechar menu</string>
@@ -18,6 +21,7 @@
     <string name="titulo_tela_donut">Gráfico por Categoria</string>
     <string name="titulo_tela_linhas">Gráfico por Tempo</string>
     <string name="titulo_tela_idioma">Idioma</string>
+    <string name="titulo_tela_sobre">Sobre</string>
 
     <string name="categoria">Categoria</string>
 
@@ -31,10 +35,16 @@
     <string name="grafico_linhas_geral">Geral</string>
 
     <string name="opcao_idioma">Idioma</string>
+    <string name="opcao_sobre">Sobre</string>
+
+    <string name="desenvolvido_por">Desenvolvido por</string>
+
+    <string name="idioma_trocado">O idioma foi alterado</string>
 
     <string-array name="spinner_despesas">
         <item>Categoria 1</item>
         <item>Categoria 2</item>
         <item>Categoria 3</item>
     </string-array>
+
 </resources>

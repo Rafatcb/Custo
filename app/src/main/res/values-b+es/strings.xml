@@ -30,6 +30,11 @@
     <string name="grafico_linhas_geral">General</string>
 
     <string name="opcao_idioma">Idioma</string>
+    <string name="opcao_sobre">Sobre</string>
+
+    <string name="desenvolvido_por">Desarrollado por</string>
+
+    <string name="idioma_trocado">Se ha cambiado el idioma</string>
 
     <string-array name="spinner_despesas">
         <item>Categoría 1</item>

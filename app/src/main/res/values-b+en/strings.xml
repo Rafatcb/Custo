@@ -17,6 +17,7 @@
     <string name="titulo_tela_donut">Chart by Category</string>
     <string name="titulo_tela_linhas">Chart by Time</string>
     <string name="titulo_tela_idioma">Language</string>
+    <string name="titulo_tela_sobre">About</string>
 
     <string name="categoria">Category</string>
 
@@ -30,6 +31,11 @@
     <string name="grafico_linhas_geral">General</string>
 
     <string name="opcao_idioma">Language</string>
+    <string name="opcao_sobre">About</string>
+
+    <string name="desenvolvido_por">Developed by</string>
+
+    <string name="idioma_trocado">The language has been changed</string>
 
     <string-array name="spinner_despesas">
         <item>Category 1</item>

@@ -70,7 +70,7 @@ public class IdiomaFragment extends Fragment implements MyAdapter.OnItemClickLis
             conf.setLocale(new Locale(idioma.getLocale1()));
         }
         res.updateConfiguration(conf, dm);
-        this.getActivity().finish();
-        startActivity(this.getActivity().getIntent());
+        this.getActivity().getIntent().putExtra("trocou_idioma", true);
+        this.getActivity().recreate();
     }
 }

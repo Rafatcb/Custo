@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +38,22 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         fragmentManager = getSupportFragmentManager();
+
+        Bundle extras = this.getIntent().getExtras();
+        if (extras != null) {
+            if (extras.containsKey("trocou_idioma")) {
+                Boolean trocouIdioma = getIntent().getExtras().getBoolean("trocou_idioma");
+                if (trocouIdioma) {
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    IdiomaFragment fragment = new IdiomaFragment();
+                    fragmentTransaction.replace(R.id.frame, fragment, "opcao_idioma");
+                    fragmentTransaction.commit();
+                    this.setTitle(R.string.titulo_tela_idioma);
+                    Toast.makeText(this, R.string.idioma_trocado, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
         if (savedInstanceState == null) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             GerenciarCategoriasFragment fragment = new GerenciarCategoriasFragment();
@@ -79,9 +96,17 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.opcao_idioma) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             IdiomaFragment fragment = new IdiomaFragment();
-            fragmentTransaction.replace(R.id.frame, fragment, "gerenciar_categorias");
+            fragmentTransaction.replace(R.id.frame, fragment, "opcao_idioma");
             fragmentTransaction.commit();
             this.setTitle(R.string.titulo_tela_idioma);
+            return true;
+        }
+        else if (id == R.id.opcao_sobre) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            SobreFragment fragment = new SobreFragment();
+            fragmentTransaction.replace(R.id.frame, fragment, "opcao_sobre");
+            fragmentTransaction.commit();
+            this.setTitle(R.string.titulo_tela_sobre);
             return true;
         }
 
