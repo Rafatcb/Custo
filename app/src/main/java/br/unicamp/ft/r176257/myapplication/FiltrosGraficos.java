@@ -1,10 +1,9 @@
-    package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -25,6 +24,9 @@ public class FiltrosGraficos {
     private Button btnMes;
     private Button btnAno;
     private Button btnSempre;
+    private int tipoGrafico; // 0 = Donut, 1 = Linhas
+    private PlaceholderDonut.PlaceholderFragment graficoDonut;
+    private PlaceholderLinhas.PlaceholderFragment graficoLinhas;
 
 
     public void instanciar(Bundle savedInstanceState, View cont, int tipo, Activity act) {
@@ -37,13 +39,16 @@ public class FiltrosGraficos {
         btnAno = (Button) filtro.findViewById(R.id.btnFiltroAno);
         btnSempre = (Button) filtro.findViewById(R.id.btnFiltroSempre);
         addOnClickBtnFiltros();
+        tipoGrafico = tipo;
         if (savedInstanceState == null) {
             switch (tipo) {
                 case 0: // Donut
-                    activity.getFragmentManager().beginTransaction().add(R.id.container, new GraficoLinhas.PlaceholderFragment()).commit();
+                    graficoDonut = new PlaceholderDonut.PlaceholderFragment();
+                    activity.getFragmentManager().beginTransaction().add(R.id.container, graficoDonut).commit();
                     break;
                 case 1: // Linhas
-                    activity.getFragmentManager().beginTransaction().add(R.id.container, new GraficoLinhas.PlaceholderFragment()).commit();
+                    graficoLinhas = new PlaceholderLinhas.PlaceholderFragment();
+                    activity.getFragmentManager().beginTransaction().add(R.id.container, graficoLinhas).commit();
                     break;
             }
         }
@@ -144,6 +149,14 @@ public class FiltrosGraficos {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         edttxtDataInicio.setText(sdf.format(calendarInicio.getTime()));
+        switch (tipoGrafico) {
+            case 0: // Donut
+                graficoDonut.setDataInicio(calendarInicio.getTime());
+                break;
+            case 1: // Linhas
+                graficoLinhas.setDataInicio(calendarInicio.getTime());
+                break;
+        }
     }
 
     private void updateDataFim() {
@@ -155,5 +168,13 @@ public class FiltrosGraficos {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         edttxtDataFim.setText(sdf.format(calendarFim.getTime()));
+        switch (tipoGrafico) {
+            case 0: // Donut
+                graficoDonut.setDataFim(calendarFim.getTime());
+                break;
+            case 1: // Linhas
+                graficoLinhas.setDataFim(calendarFim.getTime());
+                break;
+        }
     }
 }

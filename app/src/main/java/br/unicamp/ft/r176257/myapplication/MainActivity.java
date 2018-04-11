@@ -141,12 +141,12 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.frame, fragment, "grafico_donut");
             fragmentTransaction.commit();
             this.setTitle(R.string.titulo_tela_donut);
-        } else if (id == R.id.menu_grafico_linha) {/*
+        } else if (id == R.id.menu_grafico_linha) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            GraficoLinhas fragment = new GraficoLinhas();
+            GraficoLinhasFragment fragment = new GraficoLinhasFragment();
             fragmentTransaction.replace(R.id.frame, fragment, "grafico_linhas");
             fragmentTransaction.commit();
-            this.setTitle(R.string.titulo_tela_linhas);*/
+            this.setTitle(R.string.titulo_tela_linhas);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
