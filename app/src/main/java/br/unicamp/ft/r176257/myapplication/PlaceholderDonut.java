@@ -4,36 +4,33 @@ import android.app.Fragment;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AndroidRuntimeException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import lecho.lib.hellocharts.listener.PieChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SelectedValue;
 import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.PieChartView;
 
-public class GraficoDonut extends AppCompatActivity {
-
-    private FiltrosGraficos filtros = new FiltrosGraficos();
+public class PlaceholderDonut extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.grafico_donut);
-        LinearLayout item = (LinearLayout) findViewById(R.id.layoutInflater);
-        View child = getLayoutInflater().inflate(R.layout.filtros_graficos, null);
-        item.addView(child);
-        filtros.instanciar(savedInstanceState, GraficoDonut.this, 0);
-
     }
 
     public static class PlaceholderFragment extends Fragment {
+
+        private Date dataInicio = null;
+        private Date dataFim = null;
 
         private PieChartView chart;
         private PieChartData data;
@@ -66,6 +63,22 @@ public class GraficoDonut extends AppCompatActivity {
             return rootView;
         }
 
+        public void setDataInicio (Date data) {
+            dataInicio = data;
+            updateGrafico();
+        }
+
+        public void setDataFim (Date data) {
+            dataFim = data;
+            updateGrafico();
+        }
+
+        private void updateGrafico() {
+            if ((dataInicio != null) && (dataFim != null) && (chart != null)) {
+                generateData();
+            }
+        }
+
         private void generateData() {
             int numValues = 6;
 
@@ -86,7 +99,7 @@ public class GraficoDonut extends AppCompatActivity {
             }
 
             if (hasCenterText1) {
-                data.setCenterText1("100%");
+                data.setCenterText1("");
 
                 // Get roboto-italic font.
                 Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Italic.ttf");
@@ -98,7 +111,7 @@ public class GraficoDonut extends AppCompatActivity {
             }
 
             if (hasCenterText2) {
-                data.setCenterText2("Categoria 1");
+                data.setCenterText2("");
 
                 Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Italic.ttf");
 
@@ -195,8 +208,9 @@ public class GraficoDonut extends AppCompatActivity {
 
             @Override
             public void onValueDeselected() {
+                data.setCenterText1("");
+                data.setCenterText2("");
                 // TODO Auto-generated method stub
-
             }
 
         }

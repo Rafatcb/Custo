@@ -45,8 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private final ArrayList<Idioma> idiomas;
     private final OnItemClickListener listener;
 
-    public MyAdapter(ArrayList<Idioma> idiomas,
-                     OnItemClickListener listener) {
+    public MyAdapter(ArrayList<Idioma> idiomas, OnItemClickListener listener) {
         this.idiomas = idiomas;
         this.listener = listener;
     }
@@ -79,26 +78,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
          */
         holder.itemView.setBackgroundColor(selectedPos == position ? Color.rgb(213, 227, 237) : Color.TRANSPARENT);
         holder.itemView.setSelected(selectedPos == position);
-        /*switch(selectedPos) {
-            case 0: setLocale(new Locale("pt", "BR"), holder);
-                break;
-            case 1: setLocale(new Locale("en"), holder);
-                break;
-            case 2: setLocale(new Locale("es"), holder);
-                break;
-        }*/
         holder.bind(idiomas.get(position), listener);
-    }
-
-
-
-    public void setLocale(Locale myLocale, ViewHolder holder) {
-        Resources res = context.getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = myLocale;
-        res.updateConfiguration(conf, dm);
-        activity.recreate();
     }
 
     @Override

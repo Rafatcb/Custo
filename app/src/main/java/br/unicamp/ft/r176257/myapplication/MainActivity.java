@@ -1,8 +1,9 @@
 package br.unicamp.ft.r176257.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,9 +11,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FragmentManager fragmentManager;
+    private NavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,32 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        fragmentManager = getSupportFragmentManager();
+
+        Bundle extras = this.getIntent().getExtras();
+        if (extras != null) {
+            if (extras.containsKey("trocou_idioma")) {
+                Boolean trocouIdioma = getIntent().getExtras().getBoolean("trocou_idioma");
+                if (trocouIdioma) {
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    IdiomaFragment fragment = new IdiomaFragment();
+                    fragmentTransaction.replace(R.id.frame, fragment, "opcao_idioma");
+                    fragmentTransaction.commit();
+                    this.setTitle(R.string.titulo_tela_idioma);
+                    Toast.makeText(this, R.string.idioma_trocado, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        if (savedInstanceState == null) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            GerenciarCategoriasFragment fragment = new GerenciarCategoriasFragment();
+            fragmentTransaction.replace(R.id.frame, fragment, "gerenciar_categorias");
+            fragmentTransaction.commit();
+            this.setTitle(R.string.titulo_tela_categorias);
+
+        }
     }
 
     @Override
@@ -54,11 +87,26 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        if(this.getCurrentFocus() != null && this.getCurrentFocus() instanceof EditText){
+            InputMethodManager imm = (InputMethodManager) getSystemService(this.getApplicationContext().INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.opcao_idioma) {
-            Intent intent = new Intent(this, IdiomaActivity.class);
-            startActivity(intent);
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            IdiomaFragment fragment = new IdiomaFragment();
+            fragmentTransaction.replace(R.id.frame, fragment, "opcao_idioma");
+            fragmentTransaction.commit();
+            this.setTitle(R.string.titulo_tela_idioma);
+            return true;
+        }
+        else if (id == R.id.opcao_sobre) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            SobreFragment fragment = new SobreFragment();
+            fragmentTransaction.replace(R.id.frame, fragment, "opcao_sobre");
+            fragmentTransaction.commit();
+            this.setTitle(R.string.titulo_tela_sobre);
             return true;
         }
 
@@ -70,19 +118,35 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        if(this.getCurrentFocus() != null && this.getCurrentFocus() instanceof EditText){
+            InputMethodManager imm = (InputMethodManager) getSystemService(this.getApplicationContext().INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
 
         if (id == R.id.menu_categoria) {
-            Intent intent = new Intent(this, GerenciarCategorias.class);
-            startActivity(intent);
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            GerenciarCategoriasFragment fragment = new GerenciarCategoriasFragment();
+            fragmentTransaction.replace(R.id.frame, fragment, "gerenciar_categorias");
+            fragmentTransaction.commit();
+            this.setTitle(R.string.titulo_tela_categorias);
         } else if (id == R.id.menu_despesa) {
-            Intent intent = new Intent(this, GerenciarDespesas.class);
-            startActivity(intent);
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            GerenciarDespesasFragment fragment = new GerenciarDespesasFragment();
+            fragmentTransaction.replace(R.id.frame, fragment, "gerenciar_despesas");
+            fragmentTransaction.commit();
+            this.setTitle(R.string.titulo_tela_despesas);
         } else if (id == R.id.menu_grafico_donut) {
-            Intent intent = new Intent(this, GraficoDonut.class);
-            startActivity(intent);
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            GraficoDonutFragment fragment = new GraficoDonutFragment();
+            fragmentTransaction.replace(R.id.frame, fragment, "grafico_donut");
+            fragmentTransaction.commit();
+            this.setTitle(R.string.titulo_tela_donut);
         } else if (id == R.id.menu_grafico_linha) {
-            Intent intent = new Intent(this, GraficoLinhas.class);
-            startActivity(intent);
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            GraficoLinhasFragment fragment = new GraficoLinhasFragment();
+            fragmentTransaction.replace(R.id.frame, fragment, "grafico_linhas");
+            fragmentTransaction.commit();
+            this.setTitle(R.string.titulo_tela_linhas);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

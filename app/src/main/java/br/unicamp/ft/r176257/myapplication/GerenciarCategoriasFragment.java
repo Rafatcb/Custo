@@ -2,9 +2,11 @@ package br.unicamp.ft.r176257.myapplication;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class GerenciarCategorias extends AppCompatActivity {
+public class GerenciarCategoriasFragment extends Fragment {
     static private int MAX_CATEGORIAS = 5;
     private int qtdCategorias = 0;
     private List<Integer> cores = new ArrayList<>();
@@ -22,12 +24,27 @@ public class GerenciarCategorias extends AppCompatActivity {
     private List<Integer> categoriasOcupadas = new ArrayList<>();
     private LinearLayout parentLayout;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.gerenciar_categorias);
+    public GerenciarCategoriasFragment() {
 
-        parentLayout = (LinearLayout)findViewById(R.id.scroll_container);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View lview = inflater.inflate(R.layout.gerenciar_categorias, container, false);
+
+        parentLayout = (LinearLayout) lview.findViewById(R.id.scroll_container);
+
+        lview.findViewWithTag("btn_add_categoria0").setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        addClick(view);
+                    }
+                }
+        );
+
+
         cores.add(Color.BLUE);
         cores.add(Color.GREEN);
         cores.add(Color.RED);
@@ -40,6 +57,9 @@ public class GerenciarCategorias extends AppCompatActivity {
         categoriasOcupadas.add(0);
         View view1 = (View) parentLayout.findViewWithTag("color0");
         view1.setBackgroundColor(cores.get(0));
+
+        // Inflate the layout for this fragment
+        return lview;
     }
 
     public void addClick(View view) {
@@ -62,7 +82,7 @@ public class GerenciarCategorias extends AppCompatActivity {
             }
         });
 
-        Button btnDel = new Button(this);
+        Button btnDel = new Button(this.getActivity());
         btnDel.setTag("btn_del_categoria" + categoriasOcupadas.get(categoriasOcupadas.size()-1));
         btnDel.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_delete, 0, 0, 0);
         btnDel.setOnClickListener(new View.OnClickListener() {
@@ -99,14 +119,14 @@ public class GerenciarCategorias extends AppCompatActivity {
     }
 
     public void criarLinhaLayout() {
-        LinearLayout subLayout = new LinearLayout(this);
+        LinearLayout subLayout = new LinearLayout(this.getActivity());
         subLayout.setTag("layout" + categoriasLivres.peek());
         subLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-        DisplayMetrics metrics = getApplicationContext().getResources().getDisplayMetrics();
+        DisplayMetrics metrics = this.getActivity().getApplicationContext().getResources().getDisplayMetrics();
         int tamView =  (int) getResources().getDimension(R.dimen.tamanho_view_cor);
 
-        View colorView = new View(this);
+        View colorView = new View(this.getActivity());
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(
                 tamView,
                 tamView);
@@ -121,12 +141,12 @@ public class GerenciarCategorias extends AppCompatActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 1.0f);
         edtParams.setMargins(0,tamDp,0,tamDp);
-        EditText edtTxt = new EditText(this);
+        EditText edtTxt = new EditText(this.getActivity());
         edtTxt.setHint(R.string.categoria);
         edtTxt.setLayoutParams(edtParams);
         edtTxt.setTag("txt_categoria" + categoriasLivres.peek());
 
-        Button btnAdd = new Button(this);
+        Button btnAdd = new Button(this.getActivity());
         btnAdd.setTag("btn_add_categoria" + categoriasLivres.peek());
         System.out.println("set tag: " + btnAdd.getTag());
         btnAdd.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_input_add, 0, 0, 0);

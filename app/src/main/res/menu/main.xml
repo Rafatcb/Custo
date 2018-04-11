@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         android:title="@string/opcao_idioma"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/opcao_sobre"
+        android:orderInCategory="100"
+        android:title="@string/opcao_sobre"
+        app:showAsAction="never" />
 </menu>

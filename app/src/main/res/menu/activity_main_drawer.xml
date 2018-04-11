@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="Gerenciar">
+    <item android:title="@string/menu_grupo_gerenciar">
         <menu>
             <item
                 android:id="@+id/menu_categoria"
@@ -16,7 +16,7 @@
         </menu>
     </item>
 
-    <item android:title="Gráficos">
+    <item android:title="@string/menu_grupo_graficos">
         <menu>
             <item
                 android:id="@+id/menu_grafico_donut"

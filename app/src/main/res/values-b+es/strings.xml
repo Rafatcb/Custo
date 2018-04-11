@@ -3,6 +3,8 @@
     <string name="navigation_drawer_open">Abrir menú</string>
     <string name="navigation_drawer_close">Cerrar menú</string>
 
+    <string name="menu_grupo_gerenciar">Gestionar</string>
+    <string name="menu_grupo_graficos">Gráficos</string>
     <string name="menu_categoria">Categorías</string>
     <string name="menu_despesa">Gastos</string>
     <string name="menu_grafico_donut">Por Categoría</string>
@@ -28,6 +30,11 @@
     <string name="grafico_linhas_geral">General</string>
 
     <string name="opcao_idioma">Idioma</string>
+    <string name="opcao_sobre">Sobre</string>
+
+    <string name="desenvolvido_por">Desarrollado por</string>
+
+    <string name="idioma_trocado">Se ha cambiado el idioma</string>
 
     <string-array name="spinner_despesas">
         <item>Categoría 1</item>

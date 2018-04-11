@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import lecho.lib.hellocharts.animation.ChartAnimationListener;
@@ -23,21 +24,19 @@ import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
 
-public class GraficoLinhas extends AppCompatActivity {
+public class PlaceholderLinhas extends AppCompatActivity {
 
     private FiltrosGraficos filtros = new FiltrosGraficos();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.grafico_linhas);
-        LinearLayout item = (LinearLayout) findViewById(R.id.layoutInflater);
-        View child = getLayoutInflater().inflate(R.layout.filtros_graficos, null);
-        item.addView(child);
-        filtros.instanciar(savedInstanceState, GraficoLinhas.this, 1);
     }
 
     public static class PlaceholderFragment extends Fragment {
+
+        private Date dataInicio = null;
+        private Date dataFim = null;
 
         private LineChartView chart;
         private LineChartData data;
@@ -81,6 +80,22 @@ public class GraficoLinhas extends AppCompatActivity {
             toggleLabelForSelected();
             
             return rootView;
+        }
+
+        public void setDataInicio (Date data) {
+            dataInicio = data;
+            updateGrafico();
+        }
+
+        public void setDataFim (Date data) {
+            dataFim = data;
+            updateGrafico();
+        }
+
+        private void updateGrafico() {
+            if ((dataInicio != null) && (dataFim != null) && (chart != null)) {
+                generateData();
+            }
         }
 
         private void generateValues() {
