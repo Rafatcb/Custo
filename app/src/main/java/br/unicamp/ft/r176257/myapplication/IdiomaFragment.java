@@ -3,8 +3,6 @@ package br.unicamp.ft.r176257.myapplication;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
@@ -21,6 +19,7 @@ import java.util.Locale;
 
 public class IdiomaFragment extends Fragment implements MyAdapter.OnItemClickListener {
 
+    private View lview;
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -33,8 +32,9 @@ public class IdiomaFragment extends Fragment implements MyAdapter.OnItemClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View lview = inflater.inflate(R.layout.idioma_fragment, container, false);
-
+        if (lview == null) {
+            lview = inflater.inflate(R.layout.idioma_fragment, container, false);
+        }
         mRecyclerView =(RecyclerView) lview.findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
@@ -72,5 +72,11 @@ public class IdiomaFragment extends Fragment implements MyAdapter.OnItemClickLis
         res.updateConfiguration(conf, dm);
         this.getActivity().getIntent().putExtra("trocou_idioma", true);
         this.getActivity().recreate();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 }

@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 
 public class GraficoLinhasFragment extends Fragment {
 
+    private View lview;
+    private View child;
     private FiltrosGraficos filtros = new FiltrosGraficos();
 
     public GraficoLinhasFragment() {
@@ -18,14 +20,21 @@ public class GraficoLinhasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View lview = inflater.inflate(R.layout.grafico_linhas, container, false);
-
-        LinearLayout item = (LinearLayout) lview.findViewById(R.id.layoutInflater);
-        View child = this.getActivity().getLayoutInflater().inflate(R.layout.filtros_graficos, null);
-        item.addView(child);
-        filtros.instanciar(savedInstanceState, child, 1, this.getActivity());
+        if (lview == null) {
+            lview = inflater.inflate(R.layout.grafico_linhas, container, false);
+            child = this.getActivity().getLayoutInflater().inflate(R.layout.filtros_graficos, null);
+            LinearLayout item = (LinearLayout) lview.findViewById(R.id.layoutInflater);
+            item.addView(child);
+            filtros.instanciar(savedInstanceState, child, 1, this.getActivity());
+        }
 
         // Inflate the layout for this fragment
         return lview;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 }

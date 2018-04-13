@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 public class SobreFragment extends Fragment {
 
+    private View lview;
+
     public SobreFragment() {
 
     }
@@ -15,9 +17,16 @@ public class SobreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View lview = inflater.inflate(R.layout.sobre_fragment, container, false);
-
+        if (lview == null) {
+            lview = inflater.inflate(R.layout.sobre_fragment, container, false);
+        }
         // Inflate the layout for this fragment
         return lview;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 }

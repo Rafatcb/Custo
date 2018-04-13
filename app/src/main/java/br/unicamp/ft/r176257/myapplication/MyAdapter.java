@@ -1,14 +1,7 @@
 package br.unicamp.ft.r176257.myapplication;
 
-import java.util.Locale;
-
 import android.content.Context;
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
-import android.util.DisplayMetrics;
-import android.content.res.Resources;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

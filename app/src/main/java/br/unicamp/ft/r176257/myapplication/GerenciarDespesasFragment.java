@@ -16,6 +16,7 @@ import java.util.List;
 
 public class GerenciarDespesasFragment extends Fragment {
 
+    private View lview;
     private LinearLayout parentLayout;
     private List<Integer> cores = new ArrayList<>();
 
@@ -26,28 +27,35 @@ public class GerenciarDespesasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View lview = inflater.inflate(R.layout.gerenciar_despesas, container, false);
+        if (lview == null) {
+            lview = inflater.inflate(R.layout.gerenciar_despesas, container, false);
+            cores.add(Color.BLUE);
+            cores.add(Color.GREEN);
+            cores.add(Color.RED);
+            cores.add(Color.CYAN);
+            cores.add(Color.MAGENTA);
+            parentLayout = (LinearLayout) lview.findViewById(R.id.scroll_container);
 
-        cores.add(Color.BLUE);
-        cores.add(Color.GREEN);
-        cores.add(Color.RED);
-        cores.add(Color.CYAN);
-        cores.add(Color.MAGENTA);
-        parentLayout = (LinearLayout) lview.findViewById(R.id.scroll_container);
 
 
-
-        lview.findViewWithTag("btn_add").setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        addClick(view);
+            lview.findViewWithTag("btn_add").setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            addClick(view);
+                        }
                     }
-                }
-        );
+            );
+        }
 
         // Inflate the layout for this fragment
         return lview;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     public void addClick(View view) {

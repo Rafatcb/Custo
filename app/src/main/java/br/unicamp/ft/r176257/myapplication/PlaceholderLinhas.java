@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -94,6 +93,7 @@ public class PlaceholderLinhas extends AppCompatActivity {
 
         private void updateGrafico() {
             if ((dataInicio != null) && (dataFim != null) && (chart != null)) {
+                generateValues();
                 generateData();
             }
         }

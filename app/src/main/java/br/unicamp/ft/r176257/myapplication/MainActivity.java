@@ -2,6 +2,7 @@ package br.unicamp.ft.r176257.myapplication;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -39,19 +40,13 @@ public class MainActivity extends AppCompatActivity
 
         fragmentManager = getSupportFragmentManager();
 
-        Bundle extras = this.getIntent().getExtras();
-        if (extras != null) {
-            if (extras.containsKey("trocou_idioma")) {
-                Boolean trocouIdioma = getIntent().getExtras().getBoolean("trocou_idioma");
-                if (trocouIdioma) {
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    IdiomaFragment fragment = new IdiomaFragment();
-                    fragmentTransaction.replace(R.id.frame, fragment, "opcao_idioma");
-                    fragmentTransaction.commit();
-                    this.setTitle(R.string.titulo_tela_idioma);
-                    Toast.makeText(this, R.string.idioma_trocado, Toast.LENGTH_SHORT).show();
-                }
-            }
+        if (getTrocouIdioma()) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            IdiomaFragment fragment = new IdiomaFragment();
+            fragmentTransaction.replace(R.id.frame, fragment, "opcao_idioma");
+            fragmentTransaction.commit();
+            this.setTitle(R.string.titulo_tela_idioma);
+            Toast.makeText(this, R.string.idioma_trocado, Toast.LENGTH_SHORT).show();
         }
 
         if (savedInstanceState == null) {
@@ -94,19 +89,29 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.opcao_idioma) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            IdiomaFragment fragment = new IdiomaFragment();
-            fragmentTransaction.replace(R.id.frame, fragment, "opcao_idioma");
-            fragmentTransaction.commit();
-            this.setTitle(R.string.titulo_tela_idioma);
+            String tag = "opcao_idioma";
+            int title = R.string.titulo_tela_idioma;
+            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+            if ((fragment == null) || (getTrocouIdioma())) {
+                setTrocouIdioma(false);
+                replaceFragment(new IdiomaFragment(), tag, title);
+            }
+            else {
+                replaceFragment(fragment, tag, title);
+            }
             return true;
         }
         else if (id == R.id.opcao_sobre) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            SobreFragment fragment = new SobreFragment();
-            fragmentTransaction.replace(R.id.frame, fragment, "opcao_sobre");
-            fragmentTransaction.commit();
-            this.setTitle(R.string.titulo_tela_sobre);
+            String tag = "opcao_sobre";
+            int title = R.string.titulo_tela_sobre;
+            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+            if ((fragment == null) || (getTrocouIdioma())) {
+                setTrocouIdioma(false);
+                replaceFragment(new SobreFragment(), tag, title);
+            }
+            else {
+                replaceFragment(fragment, tag, title);
+            }
             return true;
         }
 
@@ -124,33 +129,76 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (id == R.id.menu_categoria) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            GerenciarCategoriasFragment fragment = new GerenciarCategoriasFragment();
-            fragmentTransaction.replace(R.id.frame, fragment, "gerenciar_categorias");
-            fragmentTransaction.commit();
-            this.setTitle(R.string.titulo_tela_categorias);
+            String tag = "gerenciar_categorias";
+            int title = R.string.titulo_tela_categorias;
+            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+            if ((fragment == null) || (getTrocouIdioma())) {
+                setTrocouIdioma(false);
+                replaceFragment(new GerenciarCategoriasFragment(), tag, title);
+            }
+            else {
+                replaceFragment(fragment, tag, title);
+            }
         } else if (id == R.id.menu_despesa) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            GerenciarDespesasFragment fragment = new GerenciarDespesasFragment();
-            fragmentTransaction.replace(R.id.frame, fragment, "gerenciar_despesas");
-            fragmentTransaction.commit();
-            this.setTitle(R.string.titulo_tela_despesas);
+            String tag = "gerenciar_despesas";
+            int title = R.string.titulo_tela_despesas;
+            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+            if ((fragment == null) || (getTrocouIdioma())) {
+                setTrocouIdioma(false);
+                replaceFragment(new GerenciarDespesasFragment(), tag, title);
+            }
+            else {
+                replaceFragment(fragment, tag, title);
+            }
         } else if (id == R.id.menu_grafico_donut) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            GraficoDonutFragment fragment = new GraficoDonutFragment();
-            fragmentTransaction.replace(R.id.frame, fragment, "grafico_donut");
-            fragmentTransaction.commit();
-            this.setTitle(R.string.titulo_tela_donut);
+            String tag = "grafico_donut";
+            int title = R.string.titulo_tela_donut;
+            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+            if ((fragment == null) || (getTrocouIdioma())) {
+                setTrocouIdioma(false);
+                replaceFragment(new GraficoDonutFragment(), tag, title);
+            }
+            else {
+                replaceFragment(fragment, tag, title);
+            }
         } else if (id == R.id.menu_grafico_linha) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            GraficoLinhasFragment fragment = new GraficoLinhasFragment();
-            fragmentTransaction.replace(R.id.frame, fragment, "grafico_linhas");
-            fragmentTransaction.commit();
-            this.setTitle(R.string.titulo_tela_linhas);
+            String tag = "grafico_linhas";
+            int title = R.string.titulo_tela_linhas;
+            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+            if ((fragment == null) || (getTrocouIdioma())) {
+                setTrocouIdioma(false);
+                replaceFragment(new GraficoLinhasFragment(), tag, title);
+            }
+            else {
+                replaceFragment(fragment, tag, title);
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void replaceFragment(Fragment f, String tag, int title) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame, f, tag);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        this.setTitle(title);
+    }
+
+    private boolean getTrocouIdioma() {
+        Bundle extras = this.getIntent().getExtras();
+        if (extras != null) {
+            if (extras.containsKey("trocou_idioma")) {
+                return getIntent().getExtras().getBoolean("trocou_idioma");
+            }
+        }
+        return false;
+    }
+
+    private void setTrocouIdioma(boolean b) {
+        Bundle extras = this.getIntent().getExtras();
+        getIntent().putExtra("trocou_idioma", b);
     }
 }

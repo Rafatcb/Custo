@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Stack;
 
 public class GerenciarCategoriasFragment extends Fragment {
+
+    private View lview;
     static private int MAX_CATEGORIAS = 5;
     private int qtdCategorias = 0;
     private List<Integer> cores = new ArrayList<>();
@@ -31,35 +33,41 @@ public class GerenciarCategoriasFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View lview = inflater.inflate(R.layout.gerenciar_categorias, container, false);
-
-        parentLayout = (LinearLayout) lview.findViewById(R.id.scroll_container);
-
-        lview.findViewWithTag("btn_add_categoria0").setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        addClick(view);
+        if (lview == null) {
+            lview = inflater.inflate(R.layout.gerenciar_categorias, container, false);
+            parentLayout = (LinearLayout) lview.findViewById(R.id.scroll_container);
+            lview.findViewWithTag("btn_add_categoria0").setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            addClick(view);
+                        }
                     }
-                }
-        );
+            );
 
 
-        cores.add(Color.BLUE);
-        cores.add(Color.GREEN);
-        cores.add(Color.RED);
-        cores.add(Color.CYAN);
-        cores.add(Color.MAGENTA);
-        categoriasLivres.add(4);
-        categoriasLivres.add(3);
-        categoriasLivres.add(2);
-        categoriasLivres.add(1);
-        categoriasOcupadas.add(0);
-        View view1 = (View) parentLayout.findViewWithTag("color0");
-        view1.setBackgroundColor(cores.get(0));
+            cores.add(Color.BLUE);
+            cores.add(Color.GREEN);
+            cores.add(Color.RED);
+            cores.add(Color.CYAN);
+            cores.add(Color.MAGENTA);
+            categoriasLivres.add(4);
+            categoriasLivres.add(3);
+            categoriasLivres.add(2);
+            categoriasLivres.add(1);
+            categoriasOcupadas.add(0);
+            View view1 = (View) parentLayout.findViewWithTag("color0");
+            view1.setBackgroundColor(cores.get(0));
 
+        }
         // Inflate the layout for this fragment
         return lview;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     public void addClick(View view) {

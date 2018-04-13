@@ -28,7 +28,6 @@ public class FiltrosGraficos {
     private PlaceholderDonut.PlaceholderFragment graficoDonut;
     private PlaceholderLinhas.PlaceholderFragment graficoLinhas;
 
-
     public void instanciar(Bundle savedInstanceState, View cont, int tipo, Activity act) {
         filtro = cont;
         activity = act;
@@ -40,18 +39,22 @@ public class FiltrosGraficos {
         btnSempre = (Button) filtro.findViewById(R.id.btnFiltroSempre);
         addOnClickBtnFiltros();
         tipoGrafico = tipo;
-        if (savedInstanceState == null) {
+        //if (savedInstanceState == null) {
             switch (tipo) {
                 case 0: // Donut
-                    graficoDonut = new PlaceholderDonut.PlaceholderFragment();
-                    activity.getFragmentManager().beginTransaction().add(R.id.container, graficoDonut).commit();
+                    if (graficoDonut == null) {
+                        graficoDonut = new PlaceholderDonut.PlaceholderFragment();
+                        activity.getFragmentManager().beginTransaction().add(R.id.container, graficoDonut).commit();
+                    }
                     break;
                 case 1: // Linhas
-                    graficoLinhas = new PlaceholderLinhas.PlaceholderFragment();
-                    activity.getFragmentManager().beginTransaction().add(R.id.container, graficoLinhas).commit();
+                    if (graficoLinhas == null) {
+                        graficoLinhas = new PlaceholderLinhas.PlaceholderFragment();
+                        activity.getFragmentManager().beginTransaction().add(R.id.container, graficoLinhas).commit();
+                    }
                     break;
             }
-        }
+        //}
 
 
         final DatePickerDialog.OnDateSetListener dateInicio = new DatePickerDialog.OnDateSetListener() {
