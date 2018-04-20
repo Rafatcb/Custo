@@ -16,6 +16,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigation = navigationView;
 
         fragmentManager = getSupportFragmentManager();
 
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.frame, fragment, "gerenciar_categorias");
             fragmentTransaction.commit();
             this.setTitle(R.string.titulo_tela_categorias);
-
+            navigation.setCheckedItem(R.id.menu_categoria);
         }
     }
 
@@ -88,6 +92,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         //noinspection SimplifiableIfStatement
+
         if (id == R.id.opcao_idioma) {
             String tag = "opcao_idioma";
             int title = R.string.titulo_tela_idioma;

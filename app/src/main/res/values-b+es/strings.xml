@@ -17,6 +17,7 @@
     <string name="titulo_tela_donut">Gráfico por Categoría</string>
     <string name="titulo_tela_linhas">Gráfico por Tiempo</string>
     <string name="titulo_tela_idioma">Idioma</string>
+    <string name="titulo_tela_sobre">Sobre</string>
 
     <string name="categoria">Categoría</string>
 
