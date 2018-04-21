@@ -79,6 +79,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return idiomas.size();
     }
 
+    public void setSelectedPos(int i) {
+        selectedPos = i;
+    }
 
     /*
         Esta classe fornece uma referência para as views dos itens

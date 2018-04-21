@@ -3,15 +3,16 @@ package br.unicamp.ft.r176257.myapplication;
 import java.util.Date;
 
 public class Despesa {
-    private String categoria;
+    private int id;
+    private Categoria categoria;
     private float despesa;
     private Date data;
 
-    public void setCategoria(String c) {
+    public void setCategoria(Categoria c) {
         categoria = c;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
@@ -29,5 +30,13 @@ public class Despesa {
 
     public Date getData() {
         return data;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

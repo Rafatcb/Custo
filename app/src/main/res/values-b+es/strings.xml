@@ -42,4 +42,7 @@
         <item>Categoría 2</item>
         <item>Categoría 3</item>
     </string-array>
+
+    <string name="outras">Otras</string>
+
 </resources>

@@ -47,4 +47,6 @@
         <item>Categoria 3</item>
     </string-array>
 
+    <string name="outras">Outras</string>
+
 </resources>

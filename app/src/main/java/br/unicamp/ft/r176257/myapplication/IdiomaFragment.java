@@ -51,6 +51,18 @@ public class IdiomaFragment extends Fragment implements MyAdapter.OnItemClickLis
 
         mAdapter = new MyAdapter(idiomas,this);
         mAdapter.setActivity(this.getActivity());
+        Locale current = getResources().getConfiguration().locale;
+        switch (current.toString()) {
+            case "pt_BR":
+                mAdapter.setSelectedPos(0);
+                break;
+            case "en":
+                mAdapter.setSelectedPos(1);
+                break;
+            case "es":
+                mAdapter.setSelectedPos(2);
+                break;
+        }
         mRecyclerView.setAdapter(mAdapter);
         // Inflate the layout for this fragment
         return lview;

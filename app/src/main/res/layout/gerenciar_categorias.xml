@@ -15,33 +15,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/scroll_container">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:tag="layout0">
-                <View
-                    android:tag="color0"
-                    android:layout_marginLeft="@dimen/margin_pequena_grude"
-                    android:layout_marginRight="@dimen/margin_pequena_grude"
-                    android:layout_marginBottom="@dimen/margin_pequena_grude"
-                    android:layout_marginTop="@dimen/margin_pequena_grude"
-                    android:layout_width="@dimen/tamanho_view_cor"
-                    android:layout_height="@dimen/tamanho_view_cor"/>
-                <EditText
-                    android:tag="txt_categoria0"
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:hint="@string/categoria"
-                    android:paddingBottom="10dp">
-                </EditText>
-                <Button
-                    android:tag="btn_add_categoria0"
-                    android:layout_width="@dimen/btn_add_width"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@android:drawable/ic_input_add"/>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
