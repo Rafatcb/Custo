@@ -1,4 +1,4 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.layout;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import br.unicamp.ft.r176257.myapplication.R;
+import br.unicamp.ft.r176257.myapplication.adapter.MyAdapterIdioma;
+import br.unicamp.ft.r176257.myapplication.auxiliar.Idioma;
 
 /**
  * Created by ricar on 03/04/2018.

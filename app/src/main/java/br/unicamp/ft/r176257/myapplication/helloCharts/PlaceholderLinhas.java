@@ -1,4 +1,4 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.helloCharts;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import br.unicamp.ft.r176257.myapplication.R;
 import lecho.lib.hellocharts.animation.ChartAnimationListener;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
@@ -24,8 +25,6 @@ import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
 
 public class PlaceholderLinhas extends AppCompatActivity {
-
-    private FiltrosGraficos filtros = new FiltrosGraficos();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

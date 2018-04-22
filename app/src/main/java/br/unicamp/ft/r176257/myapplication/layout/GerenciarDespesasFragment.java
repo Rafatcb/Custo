@@ -1,11 +1,14 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.layout;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,8 +27,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import br.unicamp.ft.r176257.myapplication.R;
+import br.unicamp.ft.r176257.myapplication.adapter.MyAdapterDespesas;
+import br.unicamp.ft.r176257.myapplication.auxiliar.Categoria;
+import br.unicamp.ft.r176257.myapplication.auxiliar.Despesa;
+import br.unicamp.ft.r176257.myapplication.database.DatabaseHelper;
+
 public class GerenciarDespesasFragment extends Fragment implements MyAdapterDespesas.OnItemClickListener {
 
+    private static final int REQUEST_CODE = 1;
     private static final int MAX_ROWS = 15;
     private View lview;
     private View viewCor;
@@ -33,12 +43,13 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
     private Spinner spinner;
     private int posicaoSelecionada;
     private List<Categoria> categorias = new ArrayList<>();
-    DatabaseHelper dbHelper;
-    SQLiteDatabase sqLiteDatabase;
+    private DatabaseHelper dbHelper;
+    private SQLiteDatabase sqLiteDatabase;
     private List<Despesa> despesas;
     private RecyclerView mRecyclerView;
     private MyAdapterDespesas mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private Despesa despesa;
 
     public GerenciarDespesasFragment() {
 
@@ -101,13 +112,36 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
 
     @Override
     public void onItemClick(Despesa despesa) {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        DialogFragment dialogExcluir = new ExcluirDespesaDialogFragment();
+        dialogExcluir.setTargetFragment(this, REQUEST_CODE);
+        dialogExcluir.show(fm,"dialog_excluir");
+        this.despesa = despesa;
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) { // Voltou da dialogFragment
+        // Make sure fragment codes match up
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            Boolean excluiu = data.getBooleanExtra("excluir", false);
+
+            if (excluiu) {
+                deleteDespesa(this.despesa);
+                despesas.remove(despesa);
+                Toast.makeText(getActivity(), R.string.despesa_excluida, Toast.LENGTH_SHORT).show();
+                mAdapter.notifyDataSetChanged();
+            }
+            else {
+                // Deseleciona aqui
+            }
+        }
     }
 
     public void addClick(View view) {
         EditText edtTxt = (EditText) this.getActivity().findViewById(R.id.edttxt_despesa);
         if ((edtTxt.getText().toString().equals("")) || (edtTxt.getText().toString().equals(null))) {
-            Toast.makeText(this.getContext(), "Informe o valor!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getContext(), R.string.informe_valor, Toast.LENGTH_SHORT).show();
             return;
         }
         Despesa d = new Despesa();
@@ -120,7 +154,7 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
             despesas.remove(MAX_ROWS);
         }
         mAdapter.notifyItemInserted(0);
-        Toast.makeText(this.getContext(), "Despesa cadastrada com sucesso", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getContext(), R.string.despesa_cadastrada, Toast.LENGTH_SHORT).show();
     }
 
     public void selectCategorias() {
@@ -171,7 +205,6 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
                 try {
                     d.setData(formatter.parse(cursor.getString(1)));
                 } catch (ParseException ex) {
-                    Toast.makeText(this.getContext(), "Ocorreu um erro na conversão de Data", Toast.LENGTH_SHORT).show();
                     ex.printStackTrace();
                 }
                 d.setDespesa(cursor.getFloat(2));
@@ -198,7 +231,23 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String format = formatter.format(d.getData());
         contentValues.put("Data", format);
-
+        d.setId(selectUltimaDespesaId());
         sqLiteDatabase.insert("Despesa", null, contentValues);
+    }
+
+    public int selectUltimaDespesaId() {
+        int id = 0;
+        String[] colunas = new String[]{"_id"};
+        Cursor cursor = sqLiteDatabase.query("Despesa", colunas, null, null,
+                null, null,  "_id DESC", "1");
+        if (cursor.moveToFirst()){
+            id  = cursor.getInt(0);
+        }
+        cursor.close();
+        return id;
+    }
+
+    public void deleteDespesa(Despesa d) {
+        sqLiteDatabase.delete("Despesa", "_id=" + d.getId(), null);
     }
 }

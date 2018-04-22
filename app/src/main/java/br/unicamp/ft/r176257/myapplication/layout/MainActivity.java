@@ -1,4 +1,4 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.layout;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,8 +18,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import br.unicamp.ft.r176257.myapplication.R;
+import br.unicamp.ft.r176257.myapplication.layout.charts.GraficoDonutFragment;
+import br.unicamp.ft.r176257.myapplication.layout.charts.GraficoLinhasFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

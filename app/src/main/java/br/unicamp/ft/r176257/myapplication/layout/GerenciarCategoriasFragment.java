@@ -1,11 +1,14 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.layout;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,8 +25,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import br.unicamp.ft.r176257.myapplication.R;
+import br.unicamp.ft.r176257.myapplication.auxiliar.Categoria;
+import br.unicamp.ft.r176257.myapplication.database.DatabaseHelper;
+
 public class GerenciarCategoriasFragment extends Fragment {
 
+    private static final int REQUEST_CODE = 2;
     private View lview;
     static private int MAX_CATEGORIAS = 6;
     private int qtdCategorias = 0;
@@ -32,8 +40,9 @@ public class GerenciarCategoriasFragment extends Fragment {
     private Stack<Integer> coresLivres;
     private List<Integer> coresOcupadas;
     private LinearLayout parentLayout;
-    DatabaseHelper dbHelper;
-    SQLiteDatabase sqLiteDatabase;
+    private DatabaseHelper dbHelper;
+    private SQLiteDatabase sqLiteDatabase;
+    private int deletarViewTag;
 
     public GerenciarCategoriasFragment() {
 
@@ -65,13 +74,25 @@ public class GerenciarCategoriasFragment extends Fragment {
         setRetainInstance(true);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) { // Voltou da dialogFragment
+        // Make sure fragment codes match up
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            Boolean excluiu = data.getBooleanExtra("excluir", false);
+            if (excluiu) {
+                excluirCategoria();
+            }
+        }
+    }
+
     public void addClick(View v) {
         String tag = (String) v.getTag();
 
         tag = tag.substring(tag.length() - 1);
         EditText edt = (EditText) parentLayout.findViewWithTag("txt_categoria" + tag);
         if ((edt.getText().toString().equals("")) || (edt.getText().toString().equals(null))) {
-            Toast.makeText(this.getContext(), "Informe o nome da categoria!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getContext(), R.string.informe_categoria, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -121,25 +142,16 @@ public class GerenciarCategoriasFragment extends Fragment {
         if (qtdCategorias < MAX_CATEGORIAS) {
             criarLayoutCategoriaNova();
         }
-        Toast.makeText(this.getContext(), "Categoria cadastrada", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getContext(), R.string.categoria_cadastrada, Toast.LENGTH_SHORT).show();
     }
 
     public void delClick(View view) {
-        qtdCategorias--;
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        DialogFragment dialogExcluir = new ExcluirCategoriaDialogFragment();
+        dialogExcluir.setTargetFragment(this, REQUEST_CODE);
+        dialogExcluir.show(fm,"dialog_excluir");
         String tag = (String) view.getTag();
-
-        int numCategoriaExcluida = Integer.parseInt(tag.substring(tag.length() - 1));
-        int idCategorias = selectByCor(numCategoriaExcluida);
-        deleteCategoria(categorias.get(idCategorias));
-        LinearLayout layoutCatExcluida = (LinearLayout) parentLayout.findViewWithTag("layout" + numCategoriaExcluida);
-        parentLayout.removeView(layoutCatExcluida);
-        coresLivres.push(numCategoriaExcluida);
-        coresOcupadas.remove(new Integer(numCategoriaExcluida));
-
-        if (qtdCategorias == MAX_CATEGORIAS-1) {
-            criarLayoutCategoriaNova();
-        }
-        Toast.makeText(this.getContext(), "Categoria excluída", Toast.LENGTH_SHORT).show();
+        deletarViewTag = Integer.parseInt(tag.substring(tag.length() - 1));
     }
 
     public void editClick(View view) {
@@ -149,7 +161,7 @@ public class GerenciarCategoriasFragment extends Fragment {
         int idCategorias = selectByCor(id);
         categorias.get(idCategorias).setNome(((EditText) parentLayout.findViewWithTag("txt_categoria" + id)).getText().toString());
         updateCategoria(categorias.get(idCategorias));
-        Toast.makeText(this.getContext(), "Nome alterado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getContext(), R.string.nome_alterado, Toast.LENGTH_SHORT).show();
     }
 
     public void criarLayoutCategoriaNova() {
@@ -293,7 +305,7 @@ public class GerenciarCategoriasFragment extends Fragment {
         }
     }
 
-    public void selectCores(){
+    private void selectCores(){
         String sql = "Select Hex from Cor";
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
         if (cursor.moveToFirst()){
@@ -304,7 +316,7 @@ public class GerenciarCategoriasFragment extends Fragment {
         cursor.close();
     }
 
-    public void selectCategorias() {
+    private void selectCategorias() {
         String sql = "Select _id, Categoria, IdCor from Categoria";
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
         categorias = new ArrayList<>();
@@ -324,7 +336,7 @@ public class GerenciarCategoriasFragment extends Fragment {
         cursor.close();
     }
 
-    public void selectCoresLivres() {
+    private void selectCoresLivres() {
         coresLivres = new Stack<>();
 
         for (int i = cores.size()-1; i >= 0; i--) {
@@ -334,7 +346,7 @@ public class GerenciarCategoriasFragment extends Fragment {
         }
     }
 
-    public void insertCategoria(Categoria c) {
+    private void insertCategoria(Categoria c) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("Categoria", c.getNome());
         contentValues.put("IdCor", (cores.indexOf(c.getCor()) + 1)); // +1 porque a List inicia em 0 e o Banco em 1
@@ -342,17 +354,17 @@ public class GerenciarCategoriasFragment extends Fragment {
         sqLiteDatabase.insert("Categoria", null, contentValues);
     }
 
-    public void updateCategoria(Categoria c) {
+    private void updateCategoria(Categoria c) {
         ContentValues cv = new ContentValues();
         cv.put("Categoria", c.getNome());
         sqLiteDatabase.update("Categoria", cv, "_id=" + c.getId(), null);
     }
 
-    public void deleteCategoria(Categoria c) {
+    private void deleteCategoria(Categoria c) {
         sqLiteDatabase.delete("Categoria", "_id=" + c.getId(), null);
     }
 
-    public int selectLastId() {
+    private int selectLastId() {
         String sql = "SELECT _id FROM Categoria ORDER BY _id DESC LIMIT 1";
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
         int id = 0;
@@ -366,7 +378,7 @@ public class GerenciarCategoriasFragment extends Fragment {
         return id;
     }
 
-    public int selectByCor(int cor) {
+    private int selectByCor(int cor) {
         for (int i = 0; i < categorias.size(); i++) {
             if (categorias.get(i).getCor().equals(cores.get(cor))) {
                 System.out.println("selectByCor = " + (i));
@@ -374,5 +386,21 @@ public class GerenciarCategoriasFragment extends Fragment {
             }
         }
         return 0;
+    }
+
+    private void excluirCategoria() {
+        qtdCategorias--;
+
+        int idCategorias = selectByCor(deletarViewTag);
+        deleteCategoria(categorias.get(idCategorias));
+        LinearLayout layoutCatExcluida = (LinearLayout) parentLayout.findViewWithTag("layout" + deletarViewTag);
+        parentLayout.removeView(layoutCatExcluida);
+        coresLivres.push(deletarViewTag);
+        coresOcupadas.remove(new Integer(deletarViewTag));
+
+        if (qtdCategorias == MAX_CATEGORIAS-1) {
+            criarLayoutCategoriaNova();
+        }
+        Toast.makeText(this.getContext(), R.string.categoria_excluida, Toast.LENGTH_SHORT).show();
     }
 }

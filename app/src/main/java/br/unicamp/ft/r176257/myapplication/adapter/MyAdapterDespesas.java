@@ -1,4 +1,4 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import br.unicamp.ft.r176257.myapplication.R;
+import br.unicamp.ft.r176257.myapplication.auxiliar.Despesa;
 
 public class MyAdapterDespesas extends RecyclerView.Adapter<MyAdapterDespesas.ViewHolder> {
 
@@ -44,7 +46,6 @@ public class MyAdapterDespesas extends RecyclerView.Adapter<MyAdapterDespesas.Vi
         this.despesas = despesas;
         this.listener = listener;
     }
-
 
     /*
        Este método cria um novo ViewHolder. Será chamada apenas algumas vezes,
@@ -79,10 +80,6 @@ public class MyAdapterDespesas extends RecyclerView.Adapter<MyAdapterDespesas.Vi
     @Override
     public int getItemCount() {
         return despesas.size();
-    }
-
-    public void setSelectedPos(int i) {
-        selectedPos = i;
     }
 
     /*

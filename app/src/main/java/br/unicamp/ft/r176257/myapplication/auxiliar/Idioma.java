@@ -1,11 +1,11 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.auxiliar;
 
 
 public class Idioma {
-    String locale1;
-    String locale2;
-    String idioma;
-    int resId;
+    private String locale1;
+    private String locale2;
+    private String idioma;
+    private int resId;
 
     public Idioma(String idioma, String loc1, int resId){
         this.idioma = idioma;
@@ -29,6 +29,12 @@ public class Idioma {
     public void setLocale2 (String locale2) { this.locale2 = locale2; }
     public String getLocale2(){
         return locale2;
+    }
+    public int getResId() {
+        return resId;
+    }
+    public void setResId(int resId) {
+        this.resId = resId;
     }
 
     public boolean hasLocale2() {

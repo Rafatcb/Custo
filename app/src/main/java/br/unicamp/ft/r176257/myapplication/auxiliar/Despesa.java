@@ -1,4 +1,4 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.auxiliar;
 
 import java.util.Date;
 

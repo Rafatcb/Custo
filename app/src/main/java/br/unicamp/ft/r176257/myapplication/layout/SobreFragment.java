@@ -1,10 +1,12 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import br.unicamp.ft.r176257.myapplication.R;
 
 public class SobreFragment extends Fragment {
 

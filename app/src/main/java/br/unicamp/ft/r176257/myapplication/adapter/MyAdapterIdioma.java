@@ -1,7 +1,7 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.adapter;
 
-import android.content.Context;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,7 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.List;
+
+import br.unicamp.ft.r176257.myapplication.R;
+import br.unicamp.ft.r176257.myapplication.auxiliar.Idioma;
 
 public class MyAdapterIdioma extends RecyclerView.Adapter<MyAdapterIdioma.ViewHolder> {
 
@@ -113,7 +117,7 @@ public class MyAdapterIdioma extends RecyclerView.Adapter<MyAdapterIdioma.ViewHo
          */
         public void bind(final Idioma idioma, final OnItemClickListener listener) {
             name.setText(idioma.getIdioma());
-            imageView.setImageResource(idioma.resId);
+            imageView.setImageResource(idioma.getResId());
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

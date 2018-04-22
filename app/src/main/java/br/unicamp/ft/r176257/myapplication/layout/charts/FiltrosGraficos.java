@@ -1,4 +1,4 @@
-package br.unicamp.ft.r176257.myapplication;
+package br.unicamp.ft.r176257.myapplication.layout.charts;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -11,6 +11,10 @@ import android.widget.EditText;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import br.unicamp.ft.r176257.myapplication.R;
+import br.unicamp.ft.r176257.myapplication.helloCharts.PlaceholderDonut;
+import br.unicamp.ft.r176257.myapplication.helloCharts.PlaceholderLinhas;
 
 public class FiltrosGraficos {
 

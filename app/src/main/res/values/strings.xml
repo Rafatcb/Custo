@@ -49,4 +49,17 @@
 
     <string name="outras">Outras</string>
 
+    <string name="informe_categoria">Informe o nome da categoria!</string>
+    <string name="categoria_cadastrada">Categoria cadastrada com sucesso</string>
+    <string name="categoria_excluida">Categoria excluída</string>
+    <string name="nome_alterado">Nome alterado</string>
+    <string name="informe_valor">Informe o valor!</string>
+    <string name="despesa_cadastrada">Despesa cadastrada com sucesso</string>
+    <string name="despesa_excluida">Despesa excluída</string>
+
+    <string name="excluir_categoria">Você deseja excluir esta categoria? Todas despesas desta categoria serão excluídas</string>
+    <string name="excluir_despesa">Você deseja excluir esta despesa?</string>
+    <string name="excluir">Excluir</string>
+    <string name="cancelar">Cancelar</string>
+
 </resources>
