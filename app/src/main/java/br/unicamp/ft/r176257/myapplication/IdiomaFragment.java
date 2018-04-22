@@ -11,17 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
  * Created by ricar on 03/04/2018.
  */
 
-public class IdiomaFragment extends Fragment implements MyAdapter.OnItemClickListener {
+public class IdiomaFragment extends Fragment implements MyAdapterIdioma.OnItemClickListener {
 
     private View lview;
     private RecyclerView mRecyclerView;
-    private MyAdapter mAdapter;
+    private MyAdapterIdioma mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public Idioma idioma;
 
@@ -41,7 +42,7 @@ public class IdiomaFragment extends Fragment implements MyAdapter.OnItemClickLis
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        ArrayList<Idioma> idiomas = new ArrayList<>();
+        List<Idioma> idiomas = new ArrayList<>();
 
         Idioma pt = new Idioma("Português", "pt", R.drawable.flag_br);
         pt.setLocale2("BR");
@@ -49,7 +50,7 @@ public class IdiomaFragment extends Fragment implements MyAdapter.OnItemClickLis
         idiomas.add(new Idioma("English", "en", R.drawable.flag_usa));
         idiomas.add(new Idioma("Español", "es", R.drawable.flag_es));
 
-        mAdapter = new MyAdapter(idiomas,this);
+        mAdapter = new MyAdapterIdioma(idiomas,this);
         mAdapter.setActivity(this.getActivity());
         Locale current = getResources().getConfiguration().locale;
         switch (current.toString()) {

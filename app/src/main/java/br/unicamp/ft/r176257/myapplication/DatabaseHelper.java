@@ -29,7 +29,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
         db.execSQL("CREATE TABLE Despesa " +
                 "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "Despesa TEXT," +
                 "Data TEXT," +
                 "Valor REAL," +
                 "IdCategoria INTEGER," +

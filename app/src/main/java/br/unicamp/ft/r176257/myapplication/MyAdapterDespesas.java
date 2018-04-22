@@ -1,28 +1,30 @@
 package br.unicamp.ft.r176257.myapplication;
 
-import android.content.Context;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class MyAdapterDespesas extends RecyclerView.Adapter<MyAdapterDespesas.ViewHolder> {
 
     /*
-    * Variável para poder selecionar uma das linhas da listas.
+     * Variável para poder selecionar uma das linhas da listas.
      */
     private int selectedPos = RecyclerView.NO_POSITION;
     private Context context;
     private Activity activity;
 
 
-    public void setActivity(Activity act){
+    public void setActivity(Activity act) {
         activity = act;
     }
 
@@ -32,14 +34,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         onItemClick.
      */
     public interface OnItemClickListener {
-        void onItemClick(Idioma idioma);
+        void onItemClick(Despesa despesa);
     }
 
-    private final ArrayList<Idioma> idiomas;
+    private final List<Despesa> despesas;
     private final OnItemClickListener listener;
 
-    public MyAdapter(ArrayList<Idioma> idiomas, OnItemClickListener listener) {
-        this.idiomas = idiomas;
+    public MyAdapterDespesas(List<Despesa> despesas, OnItemClickListener listener) {
+        this.despesas = despesas;
         this.listener = listener;
     }
 
@@ -49,14 +51,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
        dependendo de quantas linhas cabem na RecyclerView.
      */
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyAdapterDespesas.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         /*
            Usamos o LayoutInflater para transformar um arquivo XML em uma classe
            java. No caso, estamos o arquivo adapter_layout.xml
          */
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_layout, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_layout_despesa, parent, false);
         context = parent.getContext();
-        return new ViewHolder(v);
+        return new MyAdapterDespesas.ViewHolder(v);
     }
 
 
@@ -71,12 +73,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
          */
         holder.itemView.setBackgroundColor(selectedPos == position ? Color.rgb(213, 227, 237) : Color.TRANSPARENT);
         holder.itemView.setSelected(selectedPos == position);
-        holder.bind(idiomas.get(position), listener);
+        holder.bind(despesas.get(position), listener);
     }
 
     @Override
     public int getItemCount() {
-        return idiomas.size();
+        return despesas.size();
     }
 
     public void setSelectedPos(int i) {
@@ -93,8 +95,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
            de cada linha da RecyclerView. No nosso caso, são os elementos
            que declaramos em adapter_layout.xml
          */
-        private TextView name;
-        private ImageView imageView;
+        private View corView;
+        private TextView categoria;
+        private TextView valor;
+        private TextView data;
 
 
         public ViewHolder(View itemView) {
@@ -103,8 +107,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 Populamos os atributos invocando o findViewById dessa linha
                 da RecyclerView.
              */
-            name = (TextView) itemView.findViewById(R.id.textView);
-            imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            categoria = (TextView) itemView.findViewById(R.id.categoria);
+            corView = (View) itemView.findViewById(R.id.colorView);
+            valor = (TextView) itemView.findViewById(R.id.valor);
+            data = (TextView) itemView.findViewById(R.id.data);
         }
 
         /*
@@ -112,16 +118,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             que os Holders são reaproveitados, então espera-se que este método
             seja chamado várias vezes.
          */
-        public void bind(final Idioma idioma, final OnItemClickListener listener) {
-            name.setText(idioma.getIdioma());
-            imageView.setImageResource(idioma.resId);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(idioma);
-                    ViewHolder.this.onClick();
-                }
-            });
+        public void bind(final Despesa despesa, final OnItemClickListener listener) {
+            try {
+                categoria.setText(despesa.getCategoria().getNome());
+                corView.setBackgroundColor(Color.parseColor(despesa.getCategoria().getCor()));
+                DecimalFormat df = new DecimalFormat("0.00##");
+                String result = "R$ " + df.format(despesa.getDespesa());
+                valor.setText(result);
+                data.setText(new SimpleDateFormat("dd/MM/yyyy").format(despesa.getData()));
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onItemClick(despesa);
+                        MyAdapterDespesas.ViewHolder.this.onClick();
+                    }
+                });
+            } catch (NullPointerException ex){
+
+            }
         }
 
         public void onClick() {
