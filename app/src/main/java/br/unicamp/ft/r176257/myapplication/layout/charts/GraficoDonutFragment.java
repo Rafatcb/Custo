@@ -27,9 +27,9 @@ public class GraficoDonutFragment extends Fragment {
             child = this.getActivity().getLayoutInflater().inflate(R.layout.filtros_graficos, null);
             LinearLayout item = (LinearLayout) lview.findViewById(R.id.layoutInflater);
             item.addView(child);
-            filtros.instanciar(savedInstanceState, child, 0, this.getActivity());
+            filtros.instanciar(child, 0, this.getActivity());
         }
-
+        filtros.updateGraficos();
         // Inflate the layout for this fragment
         return lview;
     }

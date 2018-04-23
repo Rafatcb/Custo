@@ -1,8 +1,12 @@
 package br.unicamp.ft.r176257.myapplication.helloCharts;
 
 import android.app.Fragment;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +17,10 @@ import java.util.Date;
 import java.util.List;
 
 import br.unicamp.ft.r176257.myapplication.R;
+import br.unicamp.ft.r176257.myapplication.adapter.MyAdapterLegendaGrafico;
+import br.unicamp.ft.r176257.myapplication.auxiliar.Categoria;
+import br.unicamp.ft.r176257.myapplication.auxiliar.Despesa;
+import br.unicamp.ft.r176257.myapplication.database.DatabaseHelper;
 import lecho.lib.hellocharts.animation.ChartAnimationListener;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
@@ -31,7 +39,7 @@ public class PlaceholderLinhas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends Fragment implements MyAdapterLegendaGrafico.OnItemClickListener {
 
         private Date dataInicio = null;
         private Date dataFim = null;
@@ -55,6 +63,13 @@ public class PlaceholderLinhas extends AppCompatActivity {
         private boolean hasLabelForSelected = false;
         private boolean pointsHaveDifferentColor;
 
+        private DatabaseHelper dbHelper;
+        private SQLiteDatabase sqLiteDatabase;
+        private RecyclerView mRecyclerView;
+        private MyAdapterLegendaGrafico mAdapter;
+        private RecyclerView.LayoutManager mLayoutManager;
+        private List<Despesa> legenda;
+
         public PlaceholderFragment() {
         }
 
@@ -76,8 +91,26 @@ public class PlaceholderLinhas extends AppCompatActivity {
 
             resetViewport();
             toggleLabelForSelected();
+
+            dbHelper = new DatabaseHelper(getActivity());
+            sqLiteDatabase = dbHelper.getReadableDatabase();
+
+            mRecyclerView =(RecyclerView) rootView.findViewById(R.id.recycler_legenda);
+            mRecyclerView.setHasFixedSize(true);
+
+            mLayoutManager = new LinearLayoutManager(getActivity());
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            selectLegenda();
+            mAdapter = new MyAdapterLegendaGrafico(legenda, this);
+            mAdapter.setActivity(getActivity());
+            mRecyclerView.setAdapter(mAdapter);
             
             return rootView;
+        }
+
+        @Override
+        public void onItemClick(Despesa despesa) {
+
         }
 
         public void setDataInicio (Date data) {
@@ -95,6 +128,28 @@ public class PlaceholderLinhas extends AppCompatActivity {
                 generateValues();
                 generateData();
             }
+        }
+
+
+        private void selectLegenda() {
+            String sql = "SELECT Categoria._id, Categoria.Nome, Cor.Hex, SUM(Despesa.Valor) " +
+                    "FROM Cor JOIN Categoria ON Cor._id = Categoria.IdCor JOIN Despesa ON Despesa.IdCategoria = Categoria._id " +
+                    "GROUP BY Categoria._id";
+            Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+            legenda = new ArrayList<>();
+            if (cursor.moveToFirst()) {
+                do {
+                    Despesa d = new Despesa();
+                    Categoria c = new Categoria();
+                    c.setId(cursor.getInt(0));
+                    c.setNome(cursor.getString(1));
+                    c.setCor(cursor.getString(2));
+                    d.setCategoria(c);
+                    d.setDespesa(cursor.getFloat(3));
+                    legenda.add(d);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
         }
 
         private void generateValues() {

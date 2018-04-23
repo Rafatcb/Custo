@@ -1,4 +1,4 @@
-package br.unicamp.ft.r176257.myapplication.layout;
+package br.unicamp.ft.r176257.myapplication.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -9,15 +9,15 @@ import android.support.v4.app.DialogFragment;
 
 import br.unicamp.ft.r176257.myapplication.R;
 
-public class ExcluirDespesaDialogFragment extends DialogFragment {
+public class ExcluirCategoriaDialogFragment extends DialogFragment {
 
-    private static final int REQUEST_CODE = 1;
+    private static final int REQUEST_CODE = 2;
 
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.excluir_despesa)
+        builder.setMessage(R.string.excluir_categoria)
                 .setPositiveButton(R.string.excluir, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Excluir
@@ -43,3 +43,4 @@ public class ExcluirDespesaDialogFragment extends DialogFragment {
                 getTargetRequestCode(), REQUEST_CODE, intent);
     }
 }
+

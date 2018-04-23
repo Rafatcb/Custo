@@ -1,6 +1,8 @@
 package br.unicamp.ft.r176257.myapplication.layout;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -19,12 +21,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import br.unicamp.ft.r176257.myapplication.R;
+import br.unicamp.ft.r176257.myapplication.database.DatabaseHelper;
 import br.unicamp.ft.r176257.myapplication.layout.charts.GraficoDonutFragment;
 import br.unicamp.ft.r176257.myapplication.layout.charts.GraficoLinhasFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private DatabaseHelper dbHelper;
+    private SQLiteDatabase sqLiteDatabase;
     private FragmentManager fragmentManager;
     private NavigationView navigation;
 
@@ -65,12 +70,28 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (savedInstanceState == null) {
+            dbHelper = new DatabaseHelper(this);
+            sqLiteDatabase = dbHelper.getReadableDatabase();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            GerenciarCategoriasFragment fragment = new GerenciarCategoriasFragment();
-            fragmentTransaction.replace(R.id.frame, fragment, "gerenciar_categorias");
-            fragmentTransaction.commit();
-            this.setTitle(R.string.titulo_tela_categorias);
-            navigation.setCheckedItem(R.id.menu_categoria);
+            if (!hasCategoria()) {
+                GerenciarCategoriasFragment fragment = new GerenciarCategoriasFragment();
+                fragmentTransaction.replace(R.id.frame, fragment, "gerenciar_categorias");
+                fragmentTransaction.commit();
+                this.setTitle(R.string.titulo_tela_categorias);
+                navigation.setCheckedItem(R.id.menu_categoria);
+            } else if (!hasDespesa()) {
+                GerenciarDespesasFragment fragment = new GerenciarDespesasFragment();
+                fragmentTransaction.replace(R.id.frame, fragment, "gerenciar_despesas");
+                fragmentTransaction.commit();
+                this.setTitle(R.string.titulo_tela_despesas);
+                navigation.setCheckedItem(R.id.menu_despesa);
+            } else {
+                GraficoDonutFragment fragment = new GraficoDonutFragment();
+                fragmentTransaction.replace(R.id.frame, fragment, "grafico_donut");
+                fragmentTransaction.commit();
+                this.setTitle(R.string.titulo_tela_donut);
+                navigation.setCheckedItem(R.id.menu_grafico_donut);
+            }
         }
     }
 
@@ -217,5 +238,29 @@ public class MainActivity extends AppCompatActivity
     private void setTrocouIdioma(boolean b) {
         Bundle extras = this.getIntent().getExtras();
         getIntent().putExtra("trocou_idioma", b);
+    }
+
+    private boolean hasCategoria() {
+        String sql = "SELECT COUNT(_id) FROM Categoria";
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            if (cursor.getInt(0) > 1) {
+                cursor.close();
+                return true;
+            }
+        }
+        cursor.close();
+        return false;
+    }
+
+    private boolean hasDespesa() {
+        String sql = "SELECT _id FROM Despesa LIMIT 1";
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            return true;
+        }
+        cursor.close();
+        return false;
     }
 }

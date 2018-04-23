@@ -27,7 +27,7 @@ public class GraficoLinhasFragment extends Fragment {
             child = this.getActivity().getLayoutInflater().inflate(R.layout.filtros_graficos, null);
             LinearLayout item = (LinearLayout) lview.findViewById(R.id.layoutInflater);
             item.addView(child);
-            filtros.instanciar(savedInstanceState, child, 1, this.getActivity());
+            filtros.instanciar(child, 1, this.getActivity());
         }
 
         // Inflate the layout for this fragment

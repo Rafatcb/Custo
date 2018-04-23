@@ -2,17 +2,30 @@ package br.unicamp.ft.r176257.myapplication.layout.charts;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.os.Bundle;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import br.unicamp.ft.r176257.myapplication.R;
+import br.unicamp.ft.r176257.myapplication.adapter.MyAdapterDespesas;
+import br.unicamp.ft.r176257.myapplication.adapter.MyAdapterLegendaGrafico;
+import br.unicamp.ft.r176257.myapplication.auxiliar.Categoria;
+import br.unicamp.ft.r176257.myapplication.auxiliar.Despesa;
+import br.unicamp.ft.r176257.myapplication.database.DatabaseHelper;
 import br.unicamp.ft.r176257.myapplication.helloCharts.PlaceholderDonut;
 import br.unicamp.ft.r176257.myapplication.helloCharts.PlaceholderLinhas;
 
@@ -31,8 +44,12 @@ public class FiltrosGraficos {
     private int tipoGrafico; // 0 = Donut, 1 = Linhas
     private PlaceholderDonut.PlaceholderFragment graficoDonut;
     private PlaceholderLinhas.PlaceholderFragment graficoLinhas;
+    private DatabaseHelper dbHelper;
+    private SQLiteDatabase sqLiteDatabase;
 
-    public void instanciar(Bundle savedInstanceState, View cont, int tipo, Activity act) {
+    public void instanciar(View cont, int tipo, Activity act) {
+        dbHelper = new DatabaseHelper(act);
+        sqLiteDatabase = dbHelper.getReadableDatabase();
         filtro = cont;
         activity = act;
         edttxtDataInicio = (EditText) filtro.findViewById(R.id.edttxt_data_inicio);
@@ -43,23 +60,20 @@ public class FiltrosGraficos {
         btnSempre = (Button) filtro.findViewById(R.id.btnFiltroSempre);
         addOnClickBtnFiltros();
         tipoGrafico = tipo;
-        //if (savedInstanceState == null) {
-            switch (tipo) {
-                case 0: // Donut
-                    if (graficoDonut == null) {
-                        graficoDonut = new PlaceholderDonut.PlaceholderFragment();
-                        activity.getFragmentManager().beginTransaction().add(R.id.container, graficoDonut).commit();
-                    }
-                    break;
-                case 1: // Linhas
-                    if (graficoLinhas == null) {
-                        graficoLinhas = new PlaceholderLinhas.PlaceholderFragment();
-                        activity.getFragmentManager().beginTransaction().add(R.id.container, graficoLinhas).commit();
-                    }
-                    break;
-            }
-        //}
-
+        switch (tipo) {
+            case 0: // Donut
+                if (graficoDonut == null) {
+                    graficoDonut = new PlaceholderDonut.PlaceholderFragment();
+                    activity.getFragmentManager().beginTransaction().add(R.id.container, graficoDonut).commit();
+                }
+                break;
+            case 1: // Linhas
+                if (graficoLinhas == null) {
+                    graficoLinhas = new PlaceholderLinhas.PlaceholderFragment();
+                    activity.getFragmentManager().beginTransaction().add(R.id.container, graficoLinhas).commit();
+                }
+                break;
+        }
 
         final DatePickerDialog.OnDateSetListener dateInicio = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -146,7 +160,10 @@ public class FiltrosGraficos {
         btnSempre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                selectPrimeiraData();
+                calendarFim = Calendar.getInstance();
+                updateDataInicio();
+                updateDataFim();
             }
         });
     }
@@ -183,5 +200,35 @@ public class FiltrosGraficos {
                 graficoLinhas.setDataFim(calendarFim.getTime());
                 break;
         }
+    }
+
+    public void updateGraficos() {
+        switch (tipoGrafico) {
+            case 0: // Donut
+                graficoDonut.generateData();
+                break;
+            case 1: // Linhas
+                //graficoLinhas.setDataFim(calendarFim.getTime());
+                break;
+        }
+    }
+
+    private void selectPrimeiraData() {
+        String[] colunas = new String[]{"Data"};
+        Cursor cursor = sqLiteDatabase.query("Despesa", colunas, null, null,
+                null, null,  "_id DESC", "1");
+        if (cursor.moveToFirst()){
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date data = format.parse(cursor.getString(0));
+                calendarInicio.setTime(data);
+            } catch (ParseException ex ) {
+                ex.printStackTrace();
+            }
+        }
+        else {
+            calendarInicio = Calendar.getInstance();
+        }
+        cursor.close();
     }
 }

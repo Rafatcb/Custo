@@ -32,6 +32,7 @@ import br.unicamp.ft.r176257.myapplication.adapter.MyAdapterDespesas;
 import br.unicamp.ft.r176257.myapplication.auxiliar.Categoria;
 import br.unicamp.ft.r176257.myapplication.auxiliar.Despesa;
 import br.unicamp.ft.r176257.myapplication.database.DatabaseHelper;
+import br.unicamp.ft.r176257.myapplication.dialog.ExcluirDespesaDialogFragment;
 
 public class GerenciarDespesasFragment extends Fragment implements MyAdapterDespesas.OnItemClickListener {
 
@@ -154,6 +155,7 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
             despesas.remove(MAX_ROWS);
         }
         mAdapter.notifyItemInserted(0);
+        edtTxt.setText("");
         Toast.makeText(this.getContext(), R.string.despesa_cadastrada, Toast.LENGTH_SHORT).show();
     }
 
@@ -198,7 +200,7 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
                 null, null,  "_id DESC", "15");
         despesas = new ArrayList<>();
         if (cursor.moveToFirst()){
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             do {
                 Despesa d = new Despesa();
                 d.setId(cursor.getInt(0));
@@ -228,7 +230,7 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
         ContentValues contentValues = new ContentValues();
         contentValues.put("Valor", d.getDespesa());
         contentValues.put("IdCategoria", d.getCategoria().getId());
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String format = formatter.format(d.getData());
         contentValues.put("Data", format);
         d.setId(selectUltimaDespesaId());

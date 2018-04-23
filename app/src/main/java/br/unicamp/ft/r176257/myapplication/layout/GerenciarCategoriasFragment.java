@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ import java.util.Stack;
 import br.unicamp.ft.r176257.myapplication.R;
 import br.unicamp.ft.r176257.myapplication.auxiliar.Categoria;
 import br.unicamp.ft.r176257.myapplication.database.DatabaseHelper;
+import br.unicamp.ft.r176257.myapplication.dialog.ExcluirCategoriaDialogFragment;
 
 public class GerenciarCategoriasFragment extends Fragment {
 
@@ -64,26 +66,27 @@ public class GerenciarCategoriasFragment extends Fragment {
                 criarLayoutCategoriaNova();
             }
         }
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         // Inflate the layout for this fragment
         return lview;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) { // Voltou da dialogFragment
+        // Make sure fragment codes match up
+                super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+                Boolean excluiu = data.getBooleanExtra("excluir", false);
+                if (excluiu) {
+                        excluirCategoria();
+                    }
+            }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) { // Voltou da dialogFragment
-        // Make sure fragment codes match up
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE) {
-            Boolean excluiu = data.getBooleanExtra("excluir", false);
-            if (excluiu) {
-                excluirCategoria();
-            }
-        }
     }
 
     public void addClick(View v) {
@@ -103,7 +106,6 @@ public class GerenciarCategoriasFragment extends Fragment {
         c.setNome(((EditText) lview.findViewWithTag("txt_categoria" + id)).getText().toString());
         insertCategoria(c);
         c.setId(selectLastId());
-        System.out.println(c.getId());
         try {
             categorias.set(id, c);
         } catch (IndexOutOfBoundsException ex) {
@@ -381,7 +383,6 @@ public class GerenciarCategoriasFragment extends Fragment {
     private int selectByCor(int cor) {
         for (int i = 0; i < categorias.size(); i++) {
             if (categorias.get(i).getCor().equals(cores.get(cor))) {
-                System.out.println("selectByCor = " + (i));
                 return i;
             }
         }
