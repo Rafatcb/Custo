@@ -22,9 +22,11 @@ public class MyAdapterDespesas extends RecyclerView.Adapter<MyAdapterDespesas.Vi
      * Variável para poder selecionar uma das linhas da listas.
      */
     private int selectedPos = RecyclerView.NO_POSITION;
-    private Context context;
     private Activity activity;
 
+    public void acrescentarSelectedPos() {
+        selectedPos++;
+    }
 
     public void setActivity(Activity act) {
         activity = act;
@@ -58,7 +60,6 @@ public class MyAdapterDespesas extends RecyclerView.Adapter<MyAdapterDespesas.Vi
            java. No caso, estamos o arquivo adapter_layout.xml
          */
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_layout_despesa, parent, false);
-        context = parent.getContext();
         return new MyAdapterDespesas.ViewHolder(v);
     }
 
@@ -117,7 +118,12 @@ public class MyAdapterDespesas extends RecyclerView.Adapter<MyAdapterDespesas.Vi
          */
         public void bind(final Despesa despesa, final OnItemClickListener listener) {
             try {
-                categoria.setText(despesa.getCategoria().getNome());
+                if (despesa.getCategoria().getNome().equals("Outras")) {
+                    categoria.setText(activity.getResources().getString(R.string.outras));
+                }
+                else {
+                    categoria.setText(despesa.getCategoria().getNome());
+                }
                 corView.setBackgroundColor(Color.parseColor(despesa.getCategoria().getCor()));
                 DecimalFormat df = new DecimalFormat("0.00##");
                 String result = "R$ " + df.format(despesa.getDespesa());

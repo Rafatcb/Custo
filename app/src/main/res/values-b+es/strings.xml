@@ -5,12 +5,13 @@
 
     <string name="menu_grupo_gerenciar">Gestionar</string>
     <string name="menu_grupo_graficos">Gráficos</string>
+    <string name="menu_grupo_relatorio">Reporte</string>
     <string name="menu_categoria">Categorías</string>
     <string name="menu_despesa">Gastos</string>
     <string name="menu_grafico_donut">Por Categoría</string>
-    <string name="menu_grafico_linha">Por Tiempo</string>
     <string name="menu_cabecalho_nome">Nombre</string>
     <string name="menu_cabecalho_descricao">Descripción</string>
+    <string name="menu_salvar_relatorio">Guardar Reporte</string>
 
     <string name="titulo_tela_categorias">Gestionar Categorías</string>
     <string name="titulo_tela_despesas">Gestionar Gastos</string>
@@ -18,6 +19,7 @@
     <string name="titulo_tela_linhas">Gráfico por Tiempo</string>
     <string name="titulo_tela_idioma">Idioma</string>
     <string name="titulo_tela_sobre">Sobre</string>
+    <string name="titulo_tela_salvar_relatorio">Guardar Reporte</string>
 
     <string name="categoria">Categoría</string>
 
@@ -37,13 +39,8 @@
 
     <string name="idioma_trocado">Se ha cambiado el idioma</string>
 
-    <string-array name="spinner_despesas">
-        <item>Categoría 1</item>
-        <item>Categoría 2</item>
-        <item>Categoría 3</item>
-    </string-array>
-
     <string name="outras">Otras</string>
+    <string name="nenhuma_despesa_cadastrada">Sin gastos registrados en el período</string>
 
     <string name="informe_categoria">¡Introduzca el nombre de la categoría!</string>
     <string name="categoria_cadastrada">Categoría registrada con éxito</string>
@@ -58,4 +55,5 @@
     <string name="excluir">Eliminar</string>
     <string name="cancelar">Cancelar</string>
 
+    <string name="salvar_relatorio">Guardar Reporte</string>
 </resources>

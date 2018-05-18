@@ -1,5 +1,8 @@
 package br.unicamp.ft.r176257.myapplication.layout;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +32,7 @@ public class IdiomaFragment extends Fragment implements MyAdapterIdioma.OnItemCl
     private MyAdapterIdioma mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public Idioma idioma;
+    private Context context;
 
     public IdiomaFragment() {
 
@@ -39,6 +43,7 @@ public class IdiomaFragment extends Fragment implements MyAdapterIdioma.OnItemCl
                              Bundle savedInstanceState) {
         if (lview == null) {
             lview = inflater.inflate(R.layout.idioma_fragment, container, false);
+            context = inflater.getContext();
         }
         mRecyclerView =(RecyclerView) lview.findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -55,7 +60,7 @@ public class IdiomaFragment extends Fragment implements MyAdapterIdioma.OnItemCl
         idiomas.add(new Idioma("Español", "es", R.drawable.flag_es));
 
         mAdapter = new MyAdapterIdioma(idiomas,this);
-        mAdapter.setActivity(this.getActivity());
+        mAdapter.setActivity();
         Locale current = getResources().getConfiguration().locale;
         switch (current.toString()) {
             case "pt_BR":
@@ -82,9 +87,11 @@ public class IdiomaFragment extends Fragment implements MyAdapterIdioma.OnItemCl
 
         if (idioma.hasLocale2()) {
             conf.setLocale(new Locale(idioma.getLocale1(), idioma.getLocale2())); // API 17+ only.
+            saveLocale(idioma.getLocale1() + "_" + idioma.getLocale2());
         }
         else {
             conf.setLocale(new Locale(idioma.getLocale1()));
+            saveLocale(idioma.getLocale1());
         }
         res.updateConfiguration(conf, dm);
         this.getActivity().getIntent().putExtra("trocou_idioma", true);
@@ -95,5 +102,14 @@ public class IdiomaFragment extends Fragment implements MyAdapterIdioma.OnItemCl
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+    }
+
+    public void saveLocale(String lang) {
+        String langPref = "Language";
+        SharedPreferences prefs = context.getSharedPreferences("CommonPrefs",
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(langPref, lang);
+        editor.commit();
     }
 }

@@ -5,10 +5,11 @@
 
     <string name="menu_categoria">Categories</string>
     <string name="menu_despesa">Expenses</string>
+    <string name="menu_grupo_relatorio">Report</string>
     <string name="menu_grafico_donut">By Category</string>
-    <string name="menu_grafico_linha">By Time</string>
     <string name="menu_cabecalho_nome">Name</string>
     <string name="menu_cabecalho_descricao">Description</string>
+    <string name="menu_salvar_relatorio">Save Report</string>
 
     <string name="menu_grupo_gerenciar">Manage</string>
     <string name="menu_grupo_graficos">Charts</string>
@@ -18,6 +19,7 @@
     <string name="titulo_tela_linhas">Chart by Time</string>
     <string name="titulo_tela_idioma">Language</string>
     <string name="titulo_tela_sobre">About</string>
+    <string name="titulo_tela_salvar_relatorio">Save Report</string>
 
     <string name="categoria">Category</string>
 
@@ -37,13 +39,8 @@
 
     <string name="idioma_trocado">The language has been changed</string>
 
-    <string-array name="spinner_despesas">
-        <item>Category 1</item>
-        <item>Category 2</item>
-        <item>Category 3</item>
-    </string-array>
-
     <string name="outras">Others</string>
+    <string name="nenhuma_despesa_cadastrada">No expenses recorded in the period</string>
 
     <string name="informe_categoria">Enter the name of the category!</string>
     <string name="categoria_cadastrada">Category successfully registered</string>
@@ -58,4 +55,5 @@
     <string name="excluir">Delete</string>
     <string name="cancelar">Cancel</string>
 
+    <string name="salvar_relatorio">Save Report</string>
 </resources>

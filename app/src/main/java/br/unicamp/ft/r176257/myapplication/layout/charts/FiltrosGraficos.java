@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,20 +12,13 @@ import android.widget.EditText;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import br.unicamp.ft.r176257.myapplication.R;
-import br.unicamp.ft.r176257.myapplication.adapter.MyAdapterDespesas;
-import br.unicamp.ft.r176257.myapplication.adapter.MyAdapterLegendaGrafico;
-import br.unicamp.ft.r176257.myapplication.auxiliar.Categoria;
-import br.unicamp.ft.r176257.myapplication.auxiliar.Despesa;
 import br.unicamp.ft.r176257.myapplication.database.DatabaseHelper;
 import br.unicamp.ft.r176257.myapplication.helloCharts.PlaceholderDonut;
-import br.unicamp.ft.r176257.myapplication.helloCharts.PlaceholderLinhas;
 
 public class FiltrosGraficos {
 
@@ -43,7 +34,6 @@ public class FiltrosGraficos {
     private Button btnSempre;
     private int tipoGrafico; // 0 = Donut, 1 = Linhas
     private PlaceholderDonut.PlaceholderFragment graficoDonut;
-    private PlaceholderLinhas.PlaceholderFragment graficoLinhas;
     private DatabaseHelper dbHelper;
     private SQLiteDatabase sqLiteDatabase;
 
@@ -65,12 +55,6 @@ public class FiltrosGraficos {
                 if (graficoDonut == null) {
                     graficoDonut = new PlaceholderDonut.PlaceholderFragment();
                     activity.getFragmentManager().beginTransaction().add(R.id.container, graficoDonut).commit();
-                }
-                break;
-            case 1: // Linhas
-                if (graficoLinhas == null) {
-                    graficoLinhas = new PlaceholderLinhas.PlaceholderFragment();
-                    activity.getFragmentManager().beginTransaction().add(R.id.container, graficoLinhas).commit();
                 }
                 break;
         }
@@ -177,9 +161,6 @@ public class FiltrosGraficos {
             case 0: // Donut
                 graficoDonut.setDataInicio(calendarInicio.getTime());
                 break;
-            case 1: // Linhas
-                graficoLinhas.setDataInicio(calendarInicio.getTime());
-                break;
         }
     }
 
@@ -196,9 +177,6 @@ public class FiltrosGraficos {
             case 0: // Donut
                 graficoDonut.setDataFim(calendarFim.getTime());
                 break;
-            case 1: // Linhas
-                graficoLinhas.setDataFim(calendarFim.getTime());
-                break;
         }
     }
 
@@ -206,9 +184,6 @@ public class FiltrosGraficos {
         switch (tipoGrafico) {
             case 0: // Donut
                 graficoDonut.generateData();
-                break;
-            case 1: // Linhas
-                //graficoLinhas.setDataFim(calendarFim.getTime());
                 break;
         }
     }

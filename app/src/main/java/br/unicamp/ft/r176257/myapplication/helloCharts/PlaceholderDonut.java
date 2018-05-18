@@ -12,13 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +67,8 @@ public class PlaceholderDonut extends AppCompatActivity {
         private RecyclerView.LayoutManager mLayoutManager;
         private List<Despesa> legenda;
 
+        private TextView txtNenhumaDespesa;
+
         public PlaceholderFragment() {
         }
 
@@ -76,6 +77,7 @@ public class PlaceholderDonut extends AppCompatActivity {
             setHasOptionsMenu(true);
 
             rootView = inflater.inflate(R.layout.activity_grafico_donut, container, false);
+            txtNenhumaDespesa = (TextView) rootView.findViewById(R.id.txt_nenhuma_despesa);
 
             chart = (PieChartView) rootView.findViewById(R.id.grafico_donut);
             chart.setOnValueTouchListener(new ValueTouchListener());
@@ -194,12 +196,18 @@ public class PlaceholderDonut extends AppCompatActivity {
         public void generateData() {
             selectDespesaPorCategoria();
             List<SliceValue> values = new ArrayList<SliceValue>();
-            if ((despesaPorCategoria != null) && (!despesaPorCategoria.isEmpty())) {
+            if (despesaPorCategoria != null) {
                 int i = 0;
                 for (Map.Entry<Categoria, Float> entry : despesaPorCategoria.entrySet()) {
                     SliceValue sliceValue = new SliceValue(porcentagemCategorias.get(i), Color.parseColor(entry.getKey().getCor()));
                     values.add(sliceValue);
                     i++;
+                }
+                if (despesaPorCategoria.isEmpty()) {
+                    txtNenhumaDespesa.setVisibility(View.VISIBLE);
+                }
+                else {
+                    txtNenhumaDespesa.setVisibility(View.GONE);
                 }
             }
 
@@ -213,26 +221,28 @@ public class PlaceholderDonut extends AppCompatActivity {
                 data.setSlicesSpacing(24);
             }
 
-            if (hasCenterText1) {
-                data.setCenterText1("");
+            if (getActivity() != null) {
+                if (hasCenterText1) {
+                    data.setCenterText1("");
 
-                // Get roboto-italic font.
-                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Italic.ttf");
-                data.setCenterText1Typeface(tf);
+                    // Get roboto-italic font.
+                    Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Italic.ttf");
+                    data.setCenterText1Typeface(tf);
 
-                // Get font size from dimens.xml and convert it to sp(library uses sp values).
-                data.setCenterText1FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
-                        (int) getResources().getDimension(R.dimen.pie_chart_text1_size)));
-            }
+                    // Get font size from dimens.xml and convert it to sp(library uses sp values).
+                    data.setCenterText1FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
+                            (int) getResources().getDimension(R.dimen.pie_chart_text1_size)));
+                }
 
-            if (hasCenterText2) {
-                data.setCenterText2("");
+                if (hasCenterText2) {
+                    data.setCenterText2("");
 
-                Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Italic.ttf");
+                    Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Roboto-Italic.ttf");
 
-                data.setCenterText2Typeface(tf);
-                data.setCenterText2FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
-                        (int) getResources().getDimension(R.dimen.pie_chart_text2_size)));
+                    data.setCenterText2Typeface(tf);
+                    data.setCenterText2FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
+                            (int) getResources().getDimension(R.dimen.pie_chart_text2_size)));
+                }
             }
 
             if (chart != null) {
@@ -316,7 +326,11 @@ public class PlaceholderDonut extends AppCompatActivity {
             @Override
             public void onValueSelected(int arcIndex, SliceValue value) {
                 data.setCenterText1(String.format("%.0f", value.getValue()) + "%");
-                data.setCenterText2(categorias.get(arcIndex).getNome());
+                String nomeCategoria = categorias.get(arcIndex).getNome();
+                if (nomeCategoria.equals("Outras")) {
+                    nomeCategoria = getResources().getString(R.string.outras);
+                }
+                data.setCenterText2(nomeCategoria);
             }
 
             @Override

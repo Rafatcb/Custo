@@ -25,10 +25,17 @@
                     android:id="@+id/menu_grafico_donut"
                     android:icon="@drawable/ic_donut_large_black_24dp"
                     android:title="@string/menu_grafico_donut" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/menu_grupo_relatorio">
+        <menu>
+            <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/menu_grafico_linha"
+                    android:id="@+id/menu_salvar_relatorio"
                     android:icon="@drawable/ic_timeline_black_24dp"
-                    android:title="@string/menu_grafico_linha" />
+                    android:title="@string/salvar_relatorio" />
             </group>
         </menu>
     </item>

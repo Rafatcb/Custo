@@ -9,19 +9,20 @@
 
     <string name="menu_grupo_gerenciar">Gerenciar</string>
     <string name="menu_grupo_graficos">Gráficos</string>
+    <string name="menu_grupo_relatorio">Relatório</string>
     <string name="menu_categoria">Categorias</string>
     <string name="menu_despesa">Despesas</string>
     <string name="menu_grafico_donut">Por Categoria</string>
-    <string name="menu_grafico_linha">Por Tempo</string>
     <string name="menu_cabecalho_nome">Nome</string>
     <string name="menu_cabecalho_descricao">Descrição</string>
+    <string name="menu_salvar_relatorio">Salvar Relatório</string>
 
     <string name="titulo_tela_categorias">Gerenciar Categorias</string>
     <string name="titulo_tela_despesas">Gerenciar Despesas</string>
     <string name="titulo_tela_donut">Gráfico por Categoria</string>
-    <string name="titulo_tela_linhas">Gráfico por Tempo</string>
     <string name="titulo_tela_idioma">Idioma</string>
     <string name="titulo_tela_sobre">Sobre</string>
+    <string name="titulo_tela_salvar_relatorio">Salvar Relatório</string>
 
     <string name="categoria">Categoria</string>
 
@@ -41,13 +42,8 @@
 
     <string name="idioma_trocado">O idioma foi alterado</string>
 
-    <string-array name="spinner_despesas">
-        <item>Categoria 1</item>
-        <item>Categoria 2</item>
-        <item>Categoria 3</item>
-    </string-array>
-
     <string name="outras">Outras</string>
+    <string name="nenhuma_despesa_cadastrada">Nenhuma despesa cadastrada no período</string>
 
     <string name="informe_categoria">Informe o nome da categoria!</string>
     <string name="categoria_cadastrada">Categoria cadastrada com sucesso</string>
@@ -62,4 +58,5 @@
     <string name="excluir">Excluir</string>
     <string name="cancelar">Cancelar</string>
 
+    <string name="salvar_relatorio">Salvar Relatório</string>
 </resources>

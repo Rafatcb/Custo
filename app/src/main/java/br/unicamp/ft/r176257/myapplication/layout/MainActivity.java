@@ -1,6 +1,8 @@
 package br.unicamp.ft.r176257.myapplication.layout;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -20,10 +22,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 import br.unicamp.ft.r176257.myapplication.R;
 import br.unicamp.ft.r176257.myapplication.database.DatabaseHelper;
 import br.unicamp.ft.r176257.myapplication.layout.charts.GraficoDonutFragment;
-import br.unicamp.ft.r176257.myapplication.layout.charts.GraficoLinhasFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        loadLocale();
         Toolbar toolbar = (Toolbar) findViewById(R.id.idioma);
         setSupportActionBar(toolbar);
 
@@ -199,13 +203,13 @@ public class MainActivity extends AppCompatActivity
             else {
                 replaceFragment(fragment, tag, title);
             }
-        } else if (id == R.id.menu_grafico_linha) {
-            String tag = "grafico_linhas";
-            int title = R.string.titulo_tela_linhas;
+        } else if (id == R.id.menu_salvar_relatorio) {
+            String tag = "salvar_relatorio";
+            int title = R.string.titulo_tela_salvar_relatorio;
             Fragment fragment = fragmentManager.findFragmentByTag(tag);
             if ((fragment == null) || (getTrocouIdioma())) {
                 setTrocouIdioma(false);
-                replaceFragment(new GraficoLinhasFragment(), tag, title);
+                replaceFragment(new SalvarRelatorioFragment(), tag, title);
             }
             else {
                 replaceFragment(fragment, tag, title);
@@ -262,5 +266,24 @@ public class MainActivity extends AppCompatActivity
         }
         cursor.close();
         return false;
+    }
+
+    public void loadLocale() {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs",
+                Activity.MODE_PRIVATE);
+        String language = prefs.getString(langPref, "");
+        changeLang(language);
+    }
+
+    public void changeLang(String lang) {
+        if (lang.equalsIgnoreCase(""))
+            return;
+        Locale myLocale = new Locale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config,getBaseContext().getResources().getDisplayMetrics());
+
     }
 }

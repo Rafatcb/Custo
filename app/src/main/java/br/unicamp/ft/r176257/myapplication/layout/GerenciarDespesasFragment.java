@@ -133,9 +133,6 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
                 Toast.makeText(getActivity(), R.string.despesa_excluida, Toast.LENGTH_SHORT).show();
                 mAdapter.notifyDataSetChanged();
             }
-            else {
-                // Deseleciona aqui
-            }
         }
     }
 
@@ -155,6 +152,7 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
             despesas.remove(MAX_ROWS);
         }
         mAdapter.notifyItemInserted(0);
+        mAdapter.acrescentarSelectedPos();
         edtTxt.setText("");
         Toast.makeText(this.getContext(), R.string.despesa_cadastrada, Toast.LENGTH_SHORT).show();
     }

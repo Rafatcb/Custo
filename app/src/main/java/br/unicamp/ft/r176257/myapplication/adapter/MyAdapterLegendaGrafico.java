@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import br.unicamp.ft.r176257.myapplication.R;
@@ -45,6 +47,12 @@ public class MyAdapterLegendaGrafico extends RecyclerView.Adapter<MyAdapterLegen
     public MyAdapterLegendaGrafico(List<Despesa> despesas, OnItemClickListener listener) {
         this.despesas = despesas;
         this.listener = listener;
+        Collections.sort(despesas, new Comparator<Despesa>() {
+                        public int compare(Despesa despesa1, Despesa despesa2) {
+                            return (int) ((despesa1.getDespesa() - despesa2.getDespesa()) * -1);
+                        }
+                    }
+                );
     }
 
     /*
@@ -115,7 +123,12 @@ public class MyAdapterLegendaGrafico extends RecyclerView.Adapter<MyAdapterLegen
          */
         public void bind(final Despesa despesa, final OnItemClickListener listener) {
             try {
-                categoria.setText(despesa.getCategoria().getNome());
+                if (despesa.getCategoria().getNome().equals("Outras")) {
+                    categoria.setText(context.getResources().getString(R.string.outras));
+                }
+                else {
+                    categoria.setText(despesa.getCategoria().getNome());
+                }
                 corView.setBackgroundColor(Color.parseColor(despesa.getCategoria().getCor()));
                 DecimalFormat df = new DecimalFormat("0.00##");
                 String result = "R$ " + df.format(despesa.getDespesa());
@@ -128,7 +141,7 @@ public class MyAdapterLegendaGrafico extends RecyclerView.Adapter<MyAdapterLegen
                     }
                 });
             } catch (NullPointerException ex){
-
+                ex.printStackTrace();
             }
         }
 

@@ -21,12 +21,10 @@ public class MyAdapterIdioma extends RecyclerView.Adapter<MyAdapterIdioma.ViewHo
     * Variável para poder selecionar uma das linhas da listas.
      */
     private int selectedPos = RecyclerView.NO_POSITION;
-    private Context context;
-    private Activity activity;
 
 
-    public void setActivity(Activity act){
-        activity = act;
+    public void setActivity(){
+
     }
 
     /*
@@ -58,7 +56,6 @@ public class MyAdapterIdioma extends RecyclerView.Adapter<MyAdapterIdioma.ViewHo
            java. No caso, estamos o arquivo adapter_layout.xml
          */
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_layout_idioma, parent, false);
-        context = parent.getContext();
         return new ViewHolder(v);
     }
 
@@ -69,9 +66,9 @@ public class MyAdapterIdioma extends RecyclerView.Adapter<MyAdapterIdioma.ViewHo
      */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        /*
-            Colocamos em verde os itens que foram selecionados. Posso deixar para o final
-         */
+        if (selectedPos == -1) {
+            selectedPos = 0;
+        }
         holder.itemView.setBackgroundColor(selectedPos == position ? Color.rgb(213, 227, 237) : Color.TRANSPARENT);
         holder.itemView.setSelected(selectedPos == position);
         holder.bind(idiomas.get(position), listener);
