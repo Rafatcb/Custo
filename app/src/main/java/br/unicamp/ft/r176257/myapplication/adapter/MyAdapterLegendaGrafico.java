@@ -80,7 +80,7 @@ public class MyAdapterLegendaGrafico extends RecyclerView.Adapter<MyAdapterLegen
         /*
             Colocamos em verde os itens que foram selecionados. Posso deixar para o final
          */
-        holder.itemView.setBackgroundColor(selectedPos == position ? Color.rgb(213, 227, 237) : Color.TRANSPARENT);
+        //holder.itemView.setBackgroundColor(selectedPos == position ? Color.rgb(213, 227, 237) : Color.TRANSPARENT);
         holder.itemView.setSelected(selectedPos == position);
         holder.bind(despesas.get(position), listener);
     }

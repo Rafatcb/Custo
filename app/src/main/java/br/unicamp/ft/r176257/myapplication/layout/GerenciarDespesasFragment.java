@@ -1,6 +1,7 @@
 package br.unicamp.ft.r176257.myapplication.layout;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -142,6 +144,9 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
             Toast.makeText(this.getContext(), R.string.informe_valor, Toast.LENGTH_SHORT).show();
             return;
         }
+
+        fecharTeclado();
+
         Despesa d = new Despesa();
         d.setData(new Date());
         d.setCategoria(categorias.get(posicaoSelecionada));
@@ -151,7 +156,7 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
         if (despesas.size() > MAX_ROWS) {
             despesas.remove(MAX_ROWS);
         }
-        mAdapter.notifyItemInserted(0);
+        mAdapter.notifyItemRangeChanged(0, categorias.size());
         mAdapter.acrescentarSelectedPos();
         edtTxt.setText("");
         Toast.makeText(this.getContext(), R.string.despesa_cadastrada, Toast.LENGTH_SHORT).show();
@@ -249,5 +254,13 @@ public class GerenciarDespesasFragment extends Fragment implements MyAdapterDesp
 
     public void deleteDespesa(Despesa d) {
         sqLiteDatabase.delete("Despesa", "_id=" + d.getId(), null);
+    }
+
+    private void fecharTeclado() {
+        InputMethodManager inputManager = (InputMethodManager)
+                this.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        inputManager.hideSoftInputFromWindow(this.getActivity().getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
     }
 }

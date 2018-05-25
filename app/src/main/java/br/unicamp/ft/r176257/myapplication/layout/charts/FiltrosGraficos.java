@@ -191,7 +191,7 @@ public class FiltrosGraficos {
     private void selectPrimeiraData() {
         String[] colunas = new String[]{"Data"};
         Cursor cursor = sqLiteDatabase.query("Despesa", colunas, null, null,
-                null, null,  "_id DESC", "1");
+                null, null,  "_id", "1");
         if (cursor.moveToFirst()){
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             try {
