@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -174,7 +176,7 @@ public class PlaceholderDonut extends AppCompatActivity {
                 total += entry.getValue();
             }
             for (Map.Entry<Categoria, Float> entry : despesaPorCategoria.entrySet()) {
-                    porcentagemCategorias.add((100 * entry.getValue()) / total);
+                porcentagemCategorias.add((100 * entry.getValue()) / total);
             }
         }
 
@@ -204,6 +206,7 @@ public class PlaceholderDonut extends AppCompatActivity {
                     values.add(sliceValue);
                     i++;
                 }
+
                 if (despesaPorCategoria.isEmpty()) {
                     txtNenhumaDespesa.setVisibility(View.VISIBLE);
                 }
@@ -327,7 +330,21 @@ public class PlaceholderDonut extends AppCompatActivity {
             @Override
             public void onValueSelected(int arcIndex, SliceValue value) {
                 data.setCenterText1(String.format("%.0f", value.getValue()) + "%");
-                String nomeCategoria = categorias.get(arcIndex).getNome();
+
+                List<Despesa> temp = new ArrayList<>();
+                for (int i = 0; i < legenda.size(); i++) {
+                    temp.add(legenda.get(i));
+                }
+
+                Collections.sort(temp, new Comparator<Despesa>() {
+                    @Override public int compare(Despesa p1, Despesa p2) {
+                        return p1.getCategoria().getId() - p2.getCategoria().getId(); // Ascending
+                    }
+
+                });
+                System.out.println(arcIndex);
+                String nomeCategoria = temp.get(arcIndex).getCategoria().getNome();
+
                 if (nomeCategoria.equals("Outras")) {
                     nomeCategoria = getResources().getString(R.string.outras);
                 }
