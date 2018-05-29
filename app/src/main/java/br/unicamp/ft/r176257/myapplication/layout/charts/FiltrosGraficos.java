@@ -206,4 +206,14 @@ public class FiltrosGraficos {
         }
         cursor.close();
     }
+
+    public String getDataInicio() {
+        final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(calendarInicio.getTime());
+    }
+
+    public String getDataFim() {
+        final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(calendarFim.getTime());
+    }
 }

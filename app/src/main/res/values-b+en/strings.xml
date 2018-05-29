@@ -56,4 +56,7 @@
     <string name="cancelar">Cancel</string>
 
     <string name="salvar_relatorio">Save Report</string>
+    <string name="salvar">Save</string>
+    <string name="relatorio_sucesso">Report saved successfully</string>
+    <string name="erro_relatorio_vazio">No expenses were recorded during this period</string>
 </resources>

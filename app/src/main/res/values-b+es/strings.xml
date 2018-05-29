@@ -56,4 +56,7 @@
     <string name="cancelar">Cancelar</string>
 
     <string name="salvar_relatorio">Guardar Reporte</string>
+    <string name="salvar">Guardar</string>
+    <string name="relatorio_sucesso">Reporte guardado exitosamente</string>
+    <string name="erro_relatorio_vazio">No se ha registrado ningún gasto en este período</string>
 </resources>

@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "54316838497",
+    "firebase_url": "https://custostrabalhomobile.firebaseio.com",
+    "project_id": "custostrabalhomobile",
+    "storage_bucket": "custostrabalhomobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54316838497:android:03eabf54e3aeac47",
+        "android_client_info": {
+          "package_name": "br.unicamp.ft.r176257.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54316838497-b5h47l8bbcg0n5s2bq1fi2age50o9krf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.unicamp.ft.r176257.myapplication",
+            "certificate_hash": "a73af02a3af3ac6461a6dd4ced3b1d27aed4cbb6"
+          }
+        },
+        {
+          "client_id": "54316838497-kinubqkfpg1ipufksu0ucbo97lv9rrv6.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "54316838497-kinubqkfpg1ipufksu0ucbo97lv9rrv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6RJ_nR1CX2o8WSbKI6VcSHDy5rLK7C0E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "54316838497-kinubqkfpg1ipufksu0ucbo97lv9rrv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

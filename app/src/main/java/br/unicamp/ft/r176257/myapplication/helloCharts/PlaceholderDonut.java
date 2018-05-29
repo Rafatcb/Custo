@@ -127,6 +127,7 @@ public class PlaceholderDonut extends AppCompatActivity {
                         "Categoria JOIN Despesa ON Categoria._id = Despesa.IdCategoria " +
                         " WHERE Despesa.Data BETWEEN \"" + data1 + "\" AND \"" + data2 +
                         "\" GROUP BY Categoria._id ORDER BY Categoria._id";
+                System.out.println(sql);
                 Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
                 despesaPorCategoria = new LinkedHashMap<>();
                 if (cursor.moveToFirst()){

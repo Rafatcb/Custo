@@ -59,4 +59,7 @@
     <string name="cancelar">Cancelar</string>
 
     <string name="salvar_relatorio">Salvar Relatório</string>
+    <string name="salvar">Salvar</string>
+    <string name="relatorio_sucesso">Relatório salvo com sucesso</string>
+    <string name="erro_relatorio_vazio">Nenhuma despesa foi cadastrada neste período</string>
 </resources>
