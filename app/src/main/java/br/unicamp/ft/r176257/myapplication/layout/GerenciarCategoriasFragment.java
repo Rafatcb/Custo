@@ -293,7 +293,6 @@ public class GerenciarCategoriasFragment extends Fragment {
                 txtParams.setMargins(0, tamDp, 0, tamDp);
                 TextView txtView = new TextView(this.getActivity());
                 txtView.setHeight(tamView);
-                txtView.setTextSize(getResources().getDimension(R.dimen.fonte_categoria_outras));
                 txtView.setGravity(Gravity.CENTER_VERTICAL);
 
                 txtView.setText(getString(R.string.outras));

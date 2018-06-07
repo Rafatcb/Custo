@@ -1,4 +1,5 @@
 <resources>
+    <string name="menu_cabecalho_descricao"></string>
 
     <string name="navigation_drawer_open">Abrir menú</string>
     <string name="navigation_drawer_close">Cerrar menú</string>
@@ -9,8 +10,6 @@
     <string name="menu_categoria">Categorías</string>
     <string name="menu_despesa">Gastos</string>
     <string name="menu_grafico_donut">Por Categoría</string>
-    <string name="menu_cabecalho_nome">Nombre</string>
-    <string name="menu_cabecalho_descricao">Descripción</string>
     <string name="menu_salvar_relatorio">Guardar Reporte</string>
 
     <string name="titulo_tela_categorias">Gestionar Categorías</string>

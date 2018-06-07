@@ -3,6 +3,8 @@
     <string name="app_name" translatable="false">MyExpenses</string>
     <string name="dev_1" translatable="false">Rafael Tavares Carvalho Barros</string>
     <string name="dev_2" translatable="false">Ricardo Hideki Adati Tomomitsu</string>
+    <string name="menu_cabecalho_nome" translatable="false">MyExpenses</string>
+    <string name="menu_cabecalho_descricao"></string>
 
     <string name="navigation_drawer_open">Abrir menu</string>
     <string name="navigation_drawer_close">Fechar menu</string>
@@ -13,8 +15,6 @@
     <string name="menu_categoria">Categorias</string>
     <string name="menu_despesa">Despesas</string>
     <string name="menu_grafico_donut">Por Categoria</string>
-    <string name="menu_cabecalho_nome">Nome</string>
-    <string name="menu_cabecalho_descricao">Descrição</string>
     <string name="menu_salvar_relatorio">Salvar Relatório</string>
 
     <string name="titulo_tela_categorias">Gerenciar Categorias</string>

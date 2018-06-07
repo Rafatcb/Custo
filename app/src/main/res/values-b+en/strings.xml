@@ -1,4 +1,5 @@
 <resources>
+    <string name="menu_cabecalho_descricao"></string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,8 +8,6 @@
     <string name="menu_despesa">Expenses</string>
     <string name="menu_grupo_relatorio">Report</string>
     <string name="menu_grafico_donut">By Category</string>
-    <string name="menu_cabecalho_nome">Name</string>
-    <string name="menu_cabecalho_descricao">Description</string>
     <string name="menu_salvar_relatorio">Save Report</string>
 
     <string name="menu_grupo_gerenciar">Manage</string>

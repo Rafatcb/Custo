@@ -19,6 +19,4 @@
     <dimen name="filtros_datepicker_width">140dp</dimen>
     <dimen name="filtros_margin_entre_datepickers">15dp</dimen>
     <dimen name="btn_add_width">55dp</dimen>
-
-    <dimen name="fonte_categoria_outras">6dp</dimen>
 </resources>
